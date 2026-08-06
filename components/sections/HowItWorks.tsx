@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { cn } from "@/lib/cn";
@@ -34,6 +36,39 @@ const steps = [
 
 export function HowItWorks() {
   const [active, setActive] = useState(0);
+  const tablistRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = tablistRef.current;
+    if (!container) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const line = container.querySelector('[data-diagram-part="connector-line"]');
+      const stepButtons = container.querySelectorAll('[data-diagram-part="step"]');
+
+      if (!stepButtons.length) return;
+
+      if (line) gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
+      gsap.set(stepButtons, { opacity: 0, y: 16 });
+
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top 80%",
+          end: "top 45%",
+          scrub: 0.6,
+        },
+      });
+
+      if (line) timeline.to(line, { scaleX: 1, duration: 0.4 });
+      timeline.to(stepButtons, { opacity: 1, y: 0, stagger: 0.12, duration: 0.35 }, line ? "-=0.2" : 0);
+    }, tablistRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section className="bg-ink-950 py-24 sm:py-28">
@@ -47,12 +82,14 @@ export function HowItWorks() {
 
         <div className="mt-16">
           <div
+            ref={tablistRef}
             role="tablist"
             aria-label="Strategro's process stages"
             className="relative grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 sm:gap-8"
           >
             <div
               aria-hidden="true"
+              data-diagram-part="connector-line"
               className="absolute left-0 right-0 top-5 hidden h-px bg-paper-50/15 sm:block"
             />
             {steps.map((step, index) => (
@@ -64,6 +101,7 @@ export function HowItWorks() {
                 aria-selected={active === index}
                 aria-controls={`step-panel-${index}`}
                 onClick={() => setActive(index)}
+                data-diagram-part="step"
                 className="focus-ring group relative flex flex-col items-start gap-3 text-left"
               >
                 <span
