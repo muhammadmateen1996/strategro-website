@@ -39,10 +39,24 @@ export default function ContactPage() {
 
       <section className="bg-paper-50 py-20">
         <Container className="max-w-2xl">
-          {webhookConfigured ? (
-            <ContactForm />
-          ) : (
-            <FallbackPanel />
+          {webhookConfigured ? <ContactForm /> : <FallbackPanel />}
+
+          {siteConfig.calendlyUrl && webhookConfigured && (
+            <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-2xl border border-ink-950/8 bg-white p-6 sm:flex-row sm:items-center">
+              <div>
+                <h2 className="font-display text-lg text-ink-950">Prefer to skip the form?</h2>
+                <p className="mt-1 text-sm text-ink-700">Book a slot directly on our calendar.</p>
+              </div>
+              <a
+                href={siteConfig.calendlyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-ink-950/15 px-6 py-3 text-sm font-semibold text-ink-950 transition-colors hover:border-gold-500/60"
+              >
+                <Calendar className="size-4" aria-hidden="true" />
+                Book via Calendly
+              </a>
+            </div>
           )}
         </Container>
       </section>

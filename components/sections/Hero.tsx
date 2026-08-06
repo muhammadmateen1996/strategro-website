@@ -1,12 +1,15 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { Reveal } from "@/components/motion/Reveal";
+import { ScrollCinematic } from "@/components/motion/ScrollCinematic";
 import { SignalFlowDiagram } from "@/components/graphics/SignalFlowDiagram";
 import { siteConfig } from "@/lib/site-config";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-ink-950 pb-20 pt-16 sm:pb-28 sm:pt-20 lg:pb-32">
+    <ScrollCinematic
+      as="section"
+      className="relative overflow-hidden bg-ink-950 pb-20 pt-16 sm:pb-28 sm:pt-20 lg:pb-32"
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(ellipse_at_top,_rgba(201,154,68,0.14),_transparent_60%)]"
@@ -34,10 +37,8 @@ export function Hero() {
           </div>
         </div>
 
-        <Reveal>
-          <SignalFlowDiagram />
-        </Reveal>
+        <SignalFlowDiagram />
       </Container>
-    </section>
+    </ScrollCinematic>
   );
 }
