@@ -1,0 +1,368 @@
+import { BookOpenText, FileStack, MessageCircle, PhoneCall, Workflow } from "lucide-react";
+import type { ServiceDetail } from "@/types/content";
+
+export const services: ServiceDetail[] = [
+  {
+    slug: "ai-workflow-automation",
+    name: "AI Workflow Automation",
+    outcome: "Connect your tools so work moves without anyone chasing it.",
+    description:
+      "n8n-built automations that connect your CRM, inbox, spreadsheets, and internal systems, so information moves between them without manual re-entry.",
+    icon: Workflow,
+    metaTitle: "AI Workflow Automation for UK & UAE Businesses | Strategro",
+    metaDescription:
+      "Strategro designs n8n-based workflow automations that connect your CRM, email, and internal tools, removing manual admin and disconnected systems.",
+    primaryKeywordTheme: "AI workflow automation",
+    heroSubhead:
+      "We map your operational bottlenecks and build automations that connect the tools you already use, so data flows between them automatically.",
+    problems: [
+      "Staff manually copy data between your CRM, spreadsheets, and email",
+      "Handoffs between departments rely on someone remembering to forward something",
+      "The same operational task is repeated dozens of times a week with no variation",
+      "Reporting requires pulling numbers from three different systems by hand",
+    ],
+    whatItIncludes: [
+      {
+        title: "Process mapping",
+        description:
+          "We document your current workflow end to end, including every manual step and handoff, before proposing what to automate.",
+      },
+      {
+        title: "n8n workflow build",
+        description:
+          "Automations built on n8n, connecting your existing tools (CRM, email, spreadsheets, project management, accounting) via their APIs.",
+      },
+      {
+        title: "Error handling and monitoring",
+        description:
+          "Workflows are built with failure paths and alerts, so a broken connection is flagged rather than silently dropping data.",
+      },
+      {
+        title: "Handover documentation",
+        description:
+          "Clear documentation of what each workflow does, so your team can maintain and extend it without depending on us indefinitely.",
+      },
+    ],
+    workflow: [
+      { step: "Discover", description: "Audit current tools, data flow, and where manual work concentrates." },
+      { step: "Design", description: "Propose the automated workflow and confirm scope before any build starts." },
+      { step: "Build", description: "Construct and test the automation against real data in a staging environment." },
+      { step: "Optimise", description: "Monitor performance after launch and refine based on real usage." },
+    ],
+    decisionCriteria: [
+      "You have a repeatable process happening at least several times a week",
+      "The process touches two or more systems that don't natively talk to each other",
+      "The cost of manual errors (missed updates, duplicate records) is measurable",
+      "You want to keep using your existing tools rather than replace them",
+    ],
+    faqs: [
+      {
+        question: "Do we need to replace our current software?",
+        answer:
+          "No. Workflow automation is built to connect the tools you already use via their APIs, not to replace your CRM or accounting software.",
+      },
+      {
+        question: "What happens if a connected tool changes its API?",
+        answer:
+          "Workflows are monitored and documented so changes can be identified and fixed quickly, rather than failing silently.",
+      },
+      {
+        question: "How long does a typical build take?",
+        answer:
+          "Straightforward workflows are often live within two to three weeks from the discovery call. More complex, multi-system builds take longer and are scoped individually.",
+      },
+    ],
+    relatedServiceSlugs: ["ai-lead-content-systems", "rag-knowledge-assistants"],
+  },
+  {
+    slug: "ai-chatbots",
+    name: "AI Chatbots",
+    outcome: "Answer common questions instantly, on your website and WhatsApp.",
+    description:
+      "Custom AI chatbots trained on your business, deployed on your website and WhatsApp, that answer repeat questions and hand off to your team when needed.",
+    icon: MessageCircle,
+    metaTitle: "Custom AI Chatbots for Websites & WhatsApp | Strategro",
+    metaDescription:
+      "Strategro builds custom AI chatbots trained on your business content, deployed on your website and WhatsApp, with clear handoff to your team.",
+    primaryKeywordTheme: "AI chatbots for business",
+    heroSubhead:
+      "A chatbot trained on your services, policies, and FAQs, so visitors and customers get accurate answers immediately, day or night.",
+    problems: [
+      "Support staff answer the same handful of questions repeatedly",
+      "Website visitors leave without engaging because there is no fast way to ask a question",
+      "WhatsApp enquiries pile up outside working hours with no response",
+      "Generic chatbot tools give vague or incorrect answers because they aren't trained on your business",
+    ],
+    whatItIncludes: [
+      {
+        title: "Content training",
+        description:
+          "The chatbot is trained on your services, pricing structure, policies, and common questions, not a generic model.",
+      },
+      {
+        title: "Website and WhatsApp deployment",
+        description: "Deployed where your customers already are, with consistent behaviour across both channels.",
+      },
+      {
+        title: "Human handoff",
+        description:
+          "Clear escalation to a real person for anything outside the chatbot's scope, so nobody gets stuck talking to a bot.",
+      },
+      {
+        title: "Conversation review",
+        description:
+          "Regular review of real conversations to identify gaps in training content and improve accuracy over time.",
+      },
+    ],
+    workflow: [
+      { step: "Discover", description: "Identify the questions your team answers most often and where they arrive." },
+      { step: "Design", description: "Define scope, tone, and escalation rules before training begins." },
+      { step: "Build", description: "Train, test, and deploy the chatbot across your chosen channels." },
+      { step: "Optimise", description: "Review real conversations and refine training content." },
+    ],
+    decisionCriteria: [
+      "Your team spends meaningful time answering repeat questions",
+      "You want consistent answers across your website and WhatsApp",
+      "You need enquiries captured outside business hours",
+      "You're prepared to keep training content current as your services change",
+    ],
+    faqs: [
+      {
+        question: "Will the chatbot make things up?",
+        answer:
+          "It is scoped to answer from your provided content and will say when it doesn't know something, rather than guessing, with escalation to your team.",
+      },
+      {
+        question: "Can it work on WhatsApp and our website at the same time?",
+        answer: "Yes. The same underlying knowledge base can serve both channels with channel-appropriate formatting.",
+      },
+      {
+        question: "Who updates it when our services change?",
+        answer:
+          "We provide a straightforward process for updating training content, and can handle ongoing updates under a support arrangement if preferred.",
+      },
+    ],
+    relatedServiceSlugs: ["voice-ai-receptionists", "rag-knowledge-assistants"],
+  },
+  {
+    slug: "voice-ai-receptionists",
+    name: "Voice AI Receptionists",
+    outcome: "Never miss a call, and get appointments booked automatically.",
+    description:
+      "AI voice agents that answer inbound calls, qualify the enquiry, and book appointments directly into your calendar, with escalation to a person when needed.",
+    icon: PhoneCall,
+    metaTitle: "Voice AI Receptionists for Appointment Booking | Strategro",
+    metaDescription:
+      "Strategro builds voice AI receptionists that answer calls, qualify enquiries, and book appointments automatically, reducing missed calls.",
+    primaryKeywordTheme: "voice AI receptionist",
+    heroSubhead:
+      "A voice AI receptionist that answers every call, captures the right details, and books appointments straight into your calendar.",
+    problems: [
+      "Missed calls during busy periods or outside office hours become lost enquiries",
+      "Reception staff spend most of their time on routine booking and availability questions",
+      "Callers hang up rather than leave a voicemail",
+      "Appointment details get noted down inconsistently, causing double-bookings",
+    ],
+    whatItIncludes: [
+      {
+        title: "Call handling design",
+        description:
+          "We define the call flows your receptionist should handle directly, and which should route to a person.",
+      },
+      {
+        title: "Calendar integration",
+        description: "Direct booking into your existing calendar or scheduling system, respecting real availability.",
+      },
+      {
+        title: "Qualification logic",
+        description:
+          "Structured questions to capture the details your team needs before a call is ever routed onward.",
+      },
+      {
+        title: "Escalation handling",
+        description:
+          "Calls outside the receptionist's scope are transferred or logged for a fast callback, not left unresolved.",
+      },
+    ],
+    workflow: [
+      { step: "Discover", description: "Review current call volume, common enquiry types, and booking process." },
+      { step: "Design", description: "Script the call flows and define escalation rules with your team." },
+      { step: "Build", description: "Configure the voice agent, connect your calendar, and test with real scenarios." },
+      { step: "Optimise", description: "Review call recordings and refine handling based on real caller behaviour." },
+    ],
+    decisionCriteria: [
+      "You lose enquiries to missed calls, particularly outside office hours",
+      "Booking follows a structured, repeatable pattern (availability, service type, contact details)",
+      "You want callers handled consistently regardless of who would normally answer",
+      "You're comfortable with clear escalation rules for anything sensitive or complex",
+    ],
+    faqs: [
+      {
+        question: "Does it replace our receptionist entirely?",
+        answer:
+          "Typically no. It handles routine calls and after-hours capture, freeing your team to focus on calls that need judgement.",
+      },
+      {
+        question: "What happens with a complaint or sensitive call?",
+        answer:
+          "These are routed to a person quickly, based on rules agreed during setup, rather than the AI attempting to resolve them.",
+      },
+      {
+        question: "Which calendar systems does it work with?",
+        answer:
+          "Most common scheduling and calendar platforms can be connected. We confirm compatibility during the discovery call.",
+      },
+    ],
+    relatedServiceSlugs: ["ai-chatbots", "ai-workflow-automation"],
+  },
+  {
+    slug: "rag-knowledge-assistants",
+    name: "RAG Knowledge Assistants",
+    outcome: "Turn scattered company documents into a reliable internal assistant.",
+    description:
+      "Retrieval-augmented generation assistants trained on your internal documents, so staff get accurate, sourced answers instead of searching through folders.",
+    icon: BookOpenText,
+    metaTitle: "RAG Knowledge Assistants for Internal Teams | Strategro",
+    metaDescription:
+      "Strategro builds RAG knowledge assistants trained on your company documents, giving staff accurate, sourced answers instead of manual searching.",
+    primaryKeywordTheme: "RAG knowledge assistant",
+    heroSubhead:
+      "An internal assistant trained on your policies, procedures, and documents, giving accurate, sourced answers in seconds.",
+    problems: [
+      "Staff spend time searching shared drives for the right policy or procedure",
+      "The same question gets asked to a specialist repeatedly because the answer isn't easy to find",
+      "Documentation exists but is scattered across formats and systems",
+      "New starters take weeks to become confident finding information themselves",
+    ],
+    whatItIncludes: [
+      {
+        title: "Document audit",
+        description:
+          "We review your existing documentation for structure and currency before anything is indexed, since retrieval quality depends on this.",
+      },
+      {
+        title: "Retrieval system build",
+        description:
+          "Your documents are indexed and connected to a retrieval system that grounds every answer in a real source.",
+      },
+      {
+        title: "Source citation",
+        description:
+          "Answers reference the document they were drawn from, and the assistant declines to answer when nothing relevant exists.",
+      },
+      {
+        title: "Access controls",
+        description: "Appropriate permissions so the assistant only surfaces information relevant to who is asking.",
+      },
+    ],
+    workflow: [
+      { step: "Discover", description: "Audit document sources, formats, and how information is currently found." },
+      { step: "Design", description: "Define scope, access rules, and what 'grounded' answers should look like." },
+      { step: "Build", description: "Index documents, connect retrieval, and test against real internal questions." },
+      { step: "Optimise", description: "Expand document coverage and refine retrieval accuracy over time." },
+    ],
+    decisionCriteria: [
+      "You have a meaningful volume of internal documentation (policies, SOPs, product detail)",
+      "Staff regularly ask specialists questions that are already documented somewhere",
+      "You need answers grounded in your actual documents, not general knowledge",
+      "You can identify an owner to keep source documents current",
+    ],
+    faqs: [
+      {
+        question: "Will it answer questions outside our documents?",
+        answer:
+          "It is scoped to your indexed content and is designed to decline rather than guess when nothing relevant is found.",
+      },
+      {
+        question: "Can access be restricted by team or role?",
+        answer: "Yes, access controls can be configured so users only retrieve information relevant to their role.",
+      },
+      {
+        question: "How current does our documentation need to be?",
+        answer:
+          "It needs an owner and a process for updates. We can advise on document hygiene during the audit stage.",
+      },
+    ],
+    relatedServiceSlugs: ["ai-chatbots", "ai-workflow-automation"],
+  },
+  {
+    slug: "ai-lead-content-systems",
+    name: "AI Lead, Proposal & Content Systems",
+    outcome: "Capture, qualify, and follow up on leads without manual effort.",
+    description:
+      "Automated systems for lead capture, proposal generation, document handling, and content production, so opportunities are followed up consistently.",
+    icon: FileStack,
+    metaTitle: "AI Lead Capture & Proposal Systems | Strategro",
+    metaDescription:
+      "Strategro builds AI-powered lead capture, proposal generation, and content systems that keep opportunities moving without manual admin.",
+    primaryKeywordTheme: "AI lead capture and proposal automation",
+    heroSubhead:
+      "Systems that capture a lead, qualify it, generate the right follow-up document, and keep the opportunity moving automatically.",
+    problems: [
+      "Leads are captured but follow-up is inconsistent or delayed",
+      "Proposals and quotes are built manually from scratch each time",
+      "Content production (case studies, service pages, updates) competes with day-to-day work",
+      "There's no consistent record of what was sent to whom and when",
+    ],
+    whatItIncludes: [
+      {
+        title: "Lead capture and qualification",
+        description:
+          "Enquiries are captured from your website or forms, scored against your criteria, and routed to the right owner.",
+      },
+      {
+        title: "Proposal and document generation",
+        description:
+          "Structured proposals and quotes generated from a template and the lead's details, ready for a final human check.",
+      },
+      {
+        title: "Content system support",
+        description:
+          "Workflows to support drafting and structuring recurring content, kept under your editorial review before publishing.",
+      },
+      {
+        title: "Pipeline tracking",
+        description: "A clear, automatically updated record of what stage each opportunity is at.",
+      },
+    ],
+    workflow: [
+      { step: "Discover", description: "Map your current lead-to-proposal process and where it breaks down." },
+      { step: "Design", description: "Define qualification criteria, proposal templates, and approval steps." },
+      { step: "Build", description: "Build and test the capture, qualification, and document generation workflow." },
+      { step: "Optimise", description: "Refine scoring and templates based on real conversion data." },
+    ],
+    decisionCriteria: [
+      "You generate leads faster than you can follow up on them consistently",
+      "Proposals or quotes follow a repeatable structure",
+      "You want a clear, automatic record of pipeline activity",
+      "You're comfortable with AI-drafted documents receiving a final human check before sending",
+    ],
+    faqs: [
+      {
+        question: "Does a proposal get sent without anyone checking it?",
+        answer:
+          "No. Every generated document is designed to sit in a review step before it goes to a prospect, unless you explicitly want otherwise.",
+      },
+      {
+        question: "Can this connect to our existing CRM?",
+        answer: "Yes, lead capture and pipeline tracking are typically connected to your existing CRM rather than replacing it.",
+      },
+      {
+        question: "Does this replace our sales team?",
+        answer:
+          "No. It removes the administrative load around lead handling and document creation, so your team spends time on the conversations that need them.",
+      },
+    ],
+    relatedServiceSlugs: ["ai-workflow-automation", "ai-chatbots"],
+  },
+];
+
+export function getServiceBySlug(slug: string): ServiceDetail | undefined {
+  return services.find((service) => service.slug === slug);
+}
+
+export function getRelatedServices(service: ServiceDetail): ServiceDetail[] {
+  return service.relatedServiceSlugs
+    .map((slug) => getServiceBySlug(slug))
+    .filter((item): item is ServiceDetail => Boolean(item));
+}
