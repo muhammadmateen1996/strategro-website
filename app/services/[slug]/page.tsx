@@ -5,6 +5,7 @@ import { Check, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
+import { ServiceHeroDiagram } from "@/components/graphics/ServiceHeroDiagram";
 import { getRelatedServices, getServiceBySlug, services } from "@/content/services";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/jsonld";
 import { siteConfig } from "@/lib/site-config";
@@ -62,18 +63,23 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
             <span className="text-paper-100/80">{service.name}</span>
           </nav>
 
-          <div className="max-w-3xl">
-            <span className="mb-5 flex size-12 items-center justify-center rounded-xl bg-gold-500 text-ink-950">
-              <service.icon className="size-5" aria-hidden="true" />
-            </span>
-            <h1 className="font-display text-4xl leading-[1.1] text-paper-50 sm:text-5xl">
-              {service.name}
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-paper-100/75">
-              {service.heroSubhead}
-            </p>
-            <div className="mt-8">
-              <Button href="/contact">Book an AI Systems Audit</Button>
+          <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-8">
+            <div>
+              <span className="mb-5 flex size-12 items-center justify-center rounded-xl bg-gold-500 text-ink-950">
+                <service.icon className="size-5" aria-hidden="true" />
+              </span>
+              <h1 className="font-display text-4xl leading-[1.1] text-paper-50 sm:text-5xl">
+                {service.name}
+              </h1>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-paper-100/75">
+                {service.heroSubhead}
+              </p>
+              <div className="mt-8">
+                <Button href="/contact">Book an AI Systems Audit</Button>
+              </div>
+            </div>
+            <div className="flex justify-center lg:justify-end">
+              <ServiceHeroDiagram slug={service.slug} />
             </div>
           </div>
         </Container>

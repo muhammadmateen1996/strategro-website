@@ -73,7 +73,7 @@ export default function AboutPage() {
         <Container className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">
-              Founder
+              Leadership
             </p>
             <h2 className="mt-4 font-display text-2xl text-ink-950 sm:text-3xl">
               Muhammad Mateen Qazi
@@ -82,16 +82,15 @@ export default function AboutPage() {
           </div>
           <div className="space-y-4 text-base leading-relaxed text-ink-700">
             <p>
-              Muhammad is an electronics engineer and business analytics graduate who founded
-              Strategro to bring practical, production-grade AI automation to SMEs &mdash; built on
-              n8n, OpenAI, and retrieval-augmented generation, rather than off-the-shelf chatbot
-              widgets.
+              We founded Strategro to bring practical, production-grade AI automation to SMEs
+              &mdash; built on n8n, OpenAI, and retrieval-augmented generation, rather than
+              off-the-shelf chatbot widgets.
             </p>
             <p>
-              Before founding Strategro, he built and deployed multi-client RAG chatbot
+              Before founding Strategro, our team built and deployed multi-client RAG chatbot
               infrastructure, automated SEO content pipelines, and lead-to-document automation for
-              real estate and logistics businesses &mdash; work that now underpins how Strategro
-              designs systems for clients.
+              real estate and logistics businesses &mdash; work that now underpins how we design
+              systems for clients.
             </p>
           </div>
         </Container>
