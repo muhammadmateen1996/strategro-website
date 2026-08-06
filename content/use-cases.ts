@@ -1,15 +1,77 @@
 import type { UseCaseStory } from "@/types/content";
 
 /**
- * Illustrative workflow examples of the type of system Strategro builds.
- * These are labelled explicitly as illustrative, not client results — see
- * each usage site for the accompanying disclosure.
+ * A mix of real, delivered Strategro projects (isReal: true, with results
+ * and — where the client has agreed to be named — a client name) and
+ * illustrative examples of the type of system Strategro builds where no
+ * real client backs the specific scenario yet. Each usage site must
+ * disclose which is which.
  */
 export const useCases: UseCaseStory[] = [
+  {
+    slug: "peerz-freight-quote-calculator",
+    industry: "Logistics",
+    title: "Real-time freight quotes, replacing a 5–10 minute manual process",
+    client: "Peerz Ltd",
+    isReal: true,
+    scenario:
+      "Peerz Ltd, a UK logistics business, needed customers to get an accurate freight quote instantly rather than waiting on a team member to manually calculate distance, vehicle type, service level, and surcharges.",
+    before: [
+      "Every quote took 5–10 minutes of manual calculation",
+      "Pricing depended on whoever was available to work it out",
+      "Manual calculation left room for pricing errors",
+    ],
+    after: [
+      "Quotes generate in real time from a web form, with no manual step",
+      "Pricing accounts for distance, vehicle type, service level, pallet count, weight, and surcharges automatically",
+      "Leads and quotes are captured straight into the CRM with instant email delivery",
+    ],
+    systemFlow: [
+      "Customer submits a quote request via web form",
+      "Google Maps Distance Matrix API calculates route distance",
+      "Custom pricing logic applies vehicle type, service level, and surcharges",
+      "Instant quote delivered by email, lead logged automatically",
+    ],
+    results: [
+      "Quote time cut from 5–10 minutes to real time (seconds) — a 95% reduction",
+      "100% elimination of manual calculation errors",
+      "24/7 quote availability, no longer dependent on staff availability",
+    ],
+  },
+  {
+    slug: "real-estate-lead-document-automation",
+    industry: "Real Estate",
+    title: "From enquiry to signed documents, without manual admin",
+    isReal: true,
+    scenario:
+      "A real estate workflow where every new lead used to trigger 30–60 minutes of manual admin: creating a CRM record, setting up folders, sending upload links, and scheduling reminders by hand.",
+    before: [
+      "Each new deal took 30–60 minutes of manual setup",
+      "Document collection dragged on for 2–4 weeks",
+      "Follow-ups were easy to forget without a manual tracking system",
+    ],
+    after: [
+      "Every step from lead capture to document collection runs automatically",
+      "CRM entries, folder structures, and secure upload links are created the moment a lead comes in",
+      "Reminder emails go out on schedule, to both client and agent",
+    ],
+    systemFlow: [
+      "Lead submitted via web form",
+      "CRM entry, Drive folder structure, and secure upload link created automatically",
+      "Client and agent notified with instructions",
+      "Scheduled reminders sent until documents are received",
+    ],
+    results: [
+      "Admin time per deal cut from 30–60 minutes to around 5 minutes — an 85–90% reduction",
+      "Document collection turnaround roughly halved, from 2–4 weeks to 1–2 weeks",
+      "No more missed follow-ups or manual data entry errors",
+    ],
+  },
   {
     slug: "law-firm-intake",
     industry: "Law Firm",
     title: "New client intake, qualified before it reaches a fee earner",
+    isReal: false,
     scenario:
       "A prospective client submits an enquiry through the website outside office hours, describing a commercial dispute.",
     before: [
@@ -27,52 +89,6 @@ export const useCases: UseCaseStory[] = [
       "AI chatbot qualifies case type and urgency",
       "Summary generated and logged to CRM",
       "Routed to the right fee earner",
-    ],
-  },
-  {
-    slug: "property-enquiry-qualification",
-    industry: "Real Estate",
-    title: "Property enquiries qualified and matched before a call is booked",
-    scenario:
-      "A buyer enquires about a listing via WhatsApp on a weekend, when no agent is available to respond.",
-    before: [
-      "Message sits unanswered until Monday, and the buyer often enquires elsewhere",
-      "Agents manually ask the same qualifying questions on every call",
-      "No structured record of buyer requirements for future matching",
-    ],
-    after: [
-      "WhatsApp chatbot responds immediately and captures budget, timeline, and requirements",
-      "Qualified enquiries are routed to the right agent with full context",
-      "Unqualified enquiries are logged for future follow-up rather than lost",
-    ],
-    systemFlow: [
-      "WhatsApp enquiry received",
-      "AI chatbot captures requirements and budget",
-      "Lead scored and routed to matching agent",
-      "Buyer profile logged for future listings",
-    ],
-  },
-  {
-    slug: "logistics-status-updates",
-    industry: "Logistics",
-    title: "Shipment status updates and documents handled without a phone queue",
-    scenario:
-      "A customer calls to ask where their shipment is, a question the operations team answers dozens of times a day.",
-    before: [
-      "Operations staff interrupt planning work to answer routine status calls",
-      "Status information exists in the system but customers have no direct way to check it",
-      "Delivery documents are chased manually by phone and email",
-    ],
-    after: [
-      "Voice AI and chatbot answer routine status questions directly from the tracking system",
-      "Document requests are captured and routed automatically to the right handler",
-      "Operations staff only handle calls that genuinely need judgement",
-    ],
-    systemFlow: [
-      "Customer contacts via call or chat",
-      "AI checks live shipment status via workflow automation",
-      "Answer given directly, or routed if action is needed",
-      "Document requests logged and assigned",
     ],
   },
 ];

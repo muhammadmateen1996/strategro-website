@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "About Strategro",
   description:
-    "Strategro designs practical AI automation and data-driven systems for UK and UAE businesses, without the hype.",
+    "Strategro Ltd is a UK-registered digital technology company building AI automation for SMEs, founded by Muhammad Mateen Qazi.",
   alternates: { canonical: "/about" },
 };
 
@@ -30,6 +30,12 @@ const principles = [
   },
 ];
 
+const trackRecord = [
+  { stat: "60–95%", label: "Typical reduction in manual workflow time across delivered projects" },
+  { stat: "24/7", label: "Automated coverage delivered via deployed chatbot and voice infrastructure" },
+  { stat: "2024", label: "Strategro Ltd founded and registered in London, United Kingdom" },
+];
+
 export default function AboutPage() {
   const breadcrumb = breadcrumbSchema([
     { name: "Home", url: siteConfig.url },
@@ -46,15 +52,52 @@ export default function AboutPage() {
             AI automation, built around how your business actually works.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-paper-100/75">
-            Strategro designs AI workflow automation, customer-facing systems, and internal
-            knowledge tools for UK and UAE businesses &mdash; particularly in logistics, real
-            estate, law, and professional services, where response speed and information flow
-            directly affect revenue.
+            Strategro Ltd is a UK-registered digital technology company building AI-powered
+            business process automation for SMEs &mdash; particularly in logistics, real estate,
+            law, and professional services, where response speed and information flow directly
+            affect revenue.
           </p>
+
+          <div className="mt-12 grid gap-8 border-t border-paper-50/10 pt-10 sm:grid-cols-3">
+            {trackRecord.map((item) => (
+              <div key={item.label}>
+                <p className="font-display text-3xl text-gold-400">{item.stat}</p>
+                <p className="mt-2 text-sm leading-relaxed text-paper-100/70">{item.label}</p>
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
 
       <section className="bg-paper-50 py-20">
+        <Container className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">
+              Founder
+            </p>
+            <h2 className="mt-4 font-display text-2xl text-ink-950 sm:text-3xl">
+              Muhammad Mateen Qazi
+            </h2>
+            <p className="mt-2 text-sm text-ink-700/70">Founder &amp; Director, Strategro Ltd</p>
+          </div>
+          <div className="space-y-4 text-base leading-relaxed text-ink-700">
+            <p>
+              Muhammad is an electronics engineer and business analytics graduate who founded
+              Strategro to bring practical, production-grade AI automation to SMEs &mdash; built on
+              n8n, OpenAI, and retrieval-augmented generation, rather than off-the-shelf chatbot
+              widgets.
+            </p>
+            <p>
+              Before founding Strategro, he built and deployed multi-client RAG chatbot
+              infrastructure, automated SEO content pipelines, and lead-to-document automation for
+              real estate and logistics businesses &mdash; work that now underpins how Strategro
+              designs systems for clients.
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-paper-100 py-20">
         <Container className="grid gap-14 lg:grid-cols-2 lg:gap-16">
           <div>
             <SectionHeading
@@ -74,7 +117,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-paper-100 py-20">
+      <section className="bg-paper-50 py-20">
         <Container>
           <SectionHeading
             eyebrow="Where we work"

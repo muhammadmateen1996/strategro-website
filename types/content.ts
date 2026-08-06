@@ -29,4 +29,8 @@ export interface UseCaseStory {
   before: string[];
   after: string[];
   systemFlow: string[];
+  /** Real, delivered client work vs. an illustrative example of the type of system Strategro builds. */
+  isReal?: boolean;
+  client?: string;
+  results?: string[];
 }

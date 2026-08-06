@@ -4,12 +4,12 @@ export const siteConfig = {
   tagline: "Strategies That Grow",
   description:
     "Strategro designs AI automation, customer systems, and data-driven workflows for ambitious UK and UAE businesses.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.strategro.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.strategro.co.uk",
   calendlyUrl: process.env.NEXT_PUBLIC_CALENDLY_URL || "",
   markets: ["United Kingdom", "United Arab Emirates"],
-  email: "hello@strategro.com",
+  email: "mateen@strategro.co.uk",
   social: {
-    linkedin: "https://www.linkedin.com/company/strategro",
+    linkedin: "https://www.linkedin.com/in/muhammadmateen/",
   },
   ctaPrimary: {
     label: "Book an AI Systems Audit",
