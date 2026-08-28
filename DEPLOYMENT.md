@@ -39,16 +39,17 @@ your control.
 
 Set these in Coolify's environment variable panel for the application. None
 are required for a first deploy — the site runs in a fully functional
-fallback mode without any of them (sample blog content, contact-fallback
-panel instead of a live form).
+fallback mode without any of them (sample blog content, and Clara's chat
+widget / contact form / booking calendar default to Strategro's live
+instance regardless).
 
 | Variable | Scope | Notes |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Build + Runtime | Set to the **preview** domain initially, e.g. `https://strategro-preview.yourdomain.com`. Update and redeploy when you cut over to production. |
 | `WORDPRESS_API_URL` | Build + Runtime | Only set once you have a headless WordPress instance to connect (see §6). |
-| `NEXT_PUBLIC_CALENDLY_URL` | Build + Runtime | Optional booking link fallback. |
-| `N8N_LEAD_WEBHOOK_URL` | Runtime only | Server-only — never exposed to the browser. Leave unset until your n8n workflow is ready to receive leads. |
-| `N8N_LEAD_WEBHOOK_SECRET` | Runtime only | Optional HMAC signing secret for the webhook payload. |
+| `NEXT_PUBLIC_CLARA_CHAT_KEY` | Build + Runtime | Only needed to override the default Clara chat widget key baked into `lib/site-config.ts`. |
+| `NEXT_PUBLIC_CLARA_FORM_URL` | Build + Runtime | Only needed to override the default Clara contact form URL. |
+| `NEXT_PUBLIC_CLARA_BOOKING_URL` | Build + Runtime | Only needed to override the default Clara booking URL. |
 | `NEXT_PUBLIC_GA_ID` | Build + Runtime | Optional analytics ID. |
 
 Because `NEXT_PUBLIC_*` variables are inlined at build time, changing them

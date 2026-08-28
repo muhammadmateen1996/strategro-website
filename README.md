@@ -15,10 +15,10 @@ installation in this repository.
 - **Animation:** Framer Motion (scroll reveals, UI transitions), CSS keyframes
   for lightweight diagram animation
 - **Icons:** Lucide
-- **Validation:** Zod
 - **CMS:** WordPress REST API (optional, headless) with local sample-content
   fallback
-- **Lead delivery:** n8n webhook (server-to-server only)
+- **Chat, contact form & booking:** Clara (embedded chat widget, contact form,
+  and booking calendar, hosted at clara.strategro.co.uk)
 
 ## Project structure
 
@@ -28,22 +28,21 @@ app/                      Routes (App Router)
   labs/algorithmic-trading /labs/algorithmic-trading
   blog/                    /blog and /blog/[slug]
   contact/, about/, privacy-policy/, terms/
-  api/contact/             Contact form submission endpoint
   api/health/              Health check for Coolify / load balancers
+  opengraph-image.tsx      Generated social share image
   sitemap.ts, robots.ts    Generated SEO files
-  layout.tsx, globals.css  Root layout, fonts, Tailwind theme
+  layout.tsx, globals.css  Root layout, fonts, Tailwind theme, Clara chat widget
 
 components/
   layout/                  Header, Footer, Logo
   ui/                      Button, Container, SectionHeading
-  motion/                  Reveal (scroll-in animation wrapper)
-  graphics/                Original SVG system diagrams (hero, problems, RAG)
+  motion/                  Reveal (scroll-in fade), ScrollCinematic (GSAP hero pin)
+  graphics/                Original SVG/GSAP diagrams (hero, problems, RAG, per-service)
   sections/                Homepage sections
   blog/                    BlogCard, empty state
-  contact/                 ContactForm (client component)
 
 content/                   Structured copy: services, use-case examples, sample posts
-lib/                       wordpress.ts, n8n.ts, validation.ts, jsonld.ts, site-config.ts
+lib/                       wordpress.ts, jsonld.ts, site-config.ts (incl. Clara URLs/key)
 types/                     Shared TypeScript types
 ```
 
@@ -60,11 +59,11 @@ Open [http://localhost:3000](http://localhost:3000).
 With no environment variables set, the site runs fully functional using:
 
 - **Blog:** local sample posts (`content/sample-posts.ts`) instead of WordPress
-- **Contact page:** a mailto/booking fallback panel instead of the live form,
-  since there's no webhook configured to receive submissions
+- **Chat, contact form & booking:** Clara's live Strategro instance (the
+  defaults baked into `lib/site-config.ts`)
 
 This means the project is reviewable and demoable out of the box, before any
-WordPress or n8n connection exists.
+WordPress connection exists.
 
 ### Quality checks
 
@@ -82,9 +81,9 @@ See [`.env.example`](./.env.example) for the full list. Summary:
 | --- | --- | --- |
 | `WORDPRESS_API_URL` | No | Base WP REST API URL. Unset = sample blog content. |
 | `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical domain for metadata, sitemap, OG tags. |
-| `NEXT_PUBLIC_CALENDLY_URL` | No | Booking link shown as a contact fallback. |
-| `N8N_LEAD_WEBHOOK_URL` | No | Server-only. Unset = contact page shows a fallback panel instead of the form. |
-| `N8N_LEAD_WEBHOOK_SECRET` | No | Signs lead payloads with an HMAC-SHA256 header when set. |
+| `NEXT_PUBLIC_CLARA_CHAT_KEY` | No | Overrides the default Clara chat widget key. |
+| `NEXT_PUBLIC_CLARA_FORM_URL` | No | Overrides the default Clara contact form URL. |
+| `NEXT_PUBLIC_CLARA_BOOKING_URL` | No | Overrides the default Clara booking URL. |
 | `NEXT_PUBLIC_GA_ID` | No | Analytics, if used. |
 
 None of these are secrets that need to exist for the site to build or run —

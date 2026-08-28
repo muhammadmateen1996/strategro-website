@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
+import Script from "next/script";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/site-config";
@@ -65,6 +66,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={JsonLd({ data: organizationSchema() })}
+        />
+        <Script
+          src={siteConfig.clara.chatScriptUrl}
+          data-key={siteConfig.clara.chatKey}
+          strategy="lazyOnload"
         />
       </body>
     </html>

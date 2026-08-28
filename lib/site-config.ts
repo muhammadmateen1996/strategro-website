@@ -5,7 +5,6 @@ export const siteConfig = {
   description:
     "Strategro designs AI automation, customer systems, and data-driven workflows for ambitious UK and UAE businesses.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.strategro.co.uk",
-  calendlyUrl: process.env.NEXT_PUBLIC_CALENDLY_URL || "",
   markets: ["United Kingdom", "United Arab Emirates"],
   email: "mateen@strategro.co.uk",
   social: {
@@ -18,6 +17,16 @@ export const siteConfig = {
   ctaSecondary: {
     label: "Explore Our Systems",
     href: "/services",
+  },
+  clara: {
+    chatKey:
+      process.env.NEXT_PUBLIC_CLARA_CHAT_KEY || "pk_live_xZmsc3UKTuuVEhfcH-_SwLz-iQNsPAAi",
+    chatScriptUrl: "https://api.strategro.co.uk/embed/v1/clara.js",
+    formUrl:
+      process.env.NEXT_PUBLIC_CLARA_FORM_URL || "https://clara.strategro.co.uk/f/strategro-ltd-uk",
+    bookingUrl:
+      process.env.NEXT_PUBLIC_CLARA_BOOKING_URL ||
+      "https://clara.strategro.co.uk/book/strategro-ltd-uk",
   },
 } as const;
 
