@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Python artifacts (vendored Claude Code skills under .claude/skills/)
+__pycache__/
+*.pyc
+.coverage
+coverage-ui.json
