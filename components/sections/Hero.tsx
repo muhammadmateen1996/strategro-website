@@ -23,9 +23,9 @@ export function Hero() {
             Turn Operational Drag Into Intelligent Systems.
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper-100/75">
-            Strategro designs AI automation, customer systems, and data-driven workflows for
-            ambitious businesses &mdash; connecting the calls, messages, documents, and leads
-            that slip through the cracks into one reliable operating system.
+            We build the AI systems that catch what&rsquo;s slipping through the cracks &mdash;
+            the calls, the messages, the leads &mdash; and turn them into one system that
+            keeps working after everyone else has gone home.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-4">
             <Button href={siteConfig.ctaPrimary.href} variant="primary">

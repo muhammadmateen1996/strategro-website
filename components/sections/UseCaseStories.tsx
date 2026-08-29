@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Reveal } from "@/components/motion/Reveal";
+import { StaggerGrid } from "@/components/motion/StaggerGrid";
 import { useCases } from "@/content/use-cases";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/cn";
@@ -15,10 +15,13 @@ export function UseCaseStories() {
           description="Most of what's below is real, delivered Strategro work with real results. Where a scenario isn't backed by a named client yet, it's clearly marked as illustrative."
         />
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {useCases.map((story, index) => (
-            <Reveal key={story.slug} delay={index * 0.08}>
-              <article className="flex h-full flex-col rounded-2xl border border-ink-950/8 bg-paper-50 p-7">
+        <StaggerGrid className="mt-14 grid gap-6 lg:grid-cols-3">
+          {useCases.map((story) => (
+            <article
+              key={story.slug}
+              data-stagger-item
+              className="flex h-full flex-col rounded-2xl border border-ink-950/8 bg-paper-50 p-7"
+            >
                 <span
                   className={cn(
                     "inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em]",
@@ -62,9 +65,8 @@ export function UseCaseStories() {
                   <ArrowRight className="size-3.5" aria-hidden="true" />
                 </span>
               </article>
-            </Reveal>
           ))}
-        </div>
+        </StaggerGrid>
       </Container>
     </section>
   );
