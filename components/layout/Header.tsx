@@ -9,6 +9,7 @@ import { services } from "@/content/services";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/cn";
 import { Logo } from "@/components/layout/Logo";
+import { NavLoadingDot } from "@/components/motion/NavLoadingDot";
 
 const navLinks = [
   { label: "About", href: "/about" },
@@ -100,9 +101,10 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="focus-ring rounded-full px-4 py-2 text-sm font-medium text-paper-100 transition-colors hover:text-gold-400"
+              className="focus-ring inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-paper-100 transition-colors hover:text-gold-400"
             >
               {link.label}
+              <NavLoadingDot />
             </Link>
           ))}
         </nav>
@@ -110,9 +112,10 @@ export function Header() {
         <div className="hidden lg:block">
           <Link
             href={siteConfig.ctaPrimary.href}
-            className="focus-ring inline-flex items-center rounded-full bg-gold-500 px-5 py-2.5 text-sm font-semibold text-ink-950 transition-colors hover:bg-gold-400"
+            className="focus-ring inline-flex items-center gap-1.5 rounded-full bg-gold-500 px-5 py-2.5 text-sm font-semibold text-ink-950 transition-colors hover:bg-gold-400"
           >
             {siteConfig.ctaPrimary.label}
+            <NavLoadingDot className="bg-ink-950" />
           </Link>
         </div>
 
@@ -153,9 +156,10 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="focus-ring rounded-xl px-4 py-3 text-base font-medium text-paper-50 hover:bg-ink-800"
+                className="focus-ring flex items-center gap-2 rounded-xl px-4 py-3 text-base font-medium text-paper-50 hover:bg-ink-800"
               >
                 {link.label}
+                <NavLoadingDot />
               </Link>
             ))}
             <Link

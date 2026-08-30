@@ -5,12 +5,19 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /**
- * Pins the wrapped section briefly on desktop while the signal-flow diagram
- * assembles as the user scrolls through it, then releases and continues
- * scrolling normally. Falls back to a simple one-time reveal on smaller
- * viewports (pinning is unreliable with mobile browser chrome), and is
- * skipped entirely for prefers-reduced-motion, where the static, fully
+ * Assembles the signal-flow diagram as the Hero scrolls past: input nodes
+ * and output nodes slide in and connect through the hub, scrubbed to
+ * scroll position on desktop and played once on smaller viewports.
+ * Skipped entirely for prefers-reduced-motion, where the static, fully
  * visible markup (already correct in the server HTML) is left untouched.
+ *
+ * Deliberately does NOT use ScrollTrigger's `pin` option. Pinning inserts
+ * a `.pin-spacer` wrapper directly into the DOM outside React's tracking,
+ * re-parenting the pinned element. Next.js App Router's client-side
+ * navigation then unmounts that subtree through React's own bookkeeping,
+ * whose removeChild calls target nodes GSAP has already moved elsewhere --
+ * crashing every navigation away from a page that had this pinned
+ * ("NotFoundError: Failed to execute 'removeChild' on 'Node'").
  */
 export function ScrollCinematic({
   children,
@@ -52,10 +59,8 @@ export function ScrollCinematic({
         scrollTrigger: {
           trigger: container,
           start: "top top",
-          end: isDesktop ? "+=60%" : "+=1",
+          end: "bottom top",
           scrub: isDesktop ? 0.6 : false,
-          pin: isDesktop,
-          anticipatePin: 1,
           toggleActions: isDesktop ? undefined : "play none none reverse",
         },
       });

@@ -3,6 +3,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { BlogEmptyState } from "@/components/blog/EmptyState";
+import { StaggerGrid } from "@/components/motion/StaggerGrid";
 import { getPosts } from "@/lib/wordpress";
 
 export async function InsightsPreview() {
@@ -24,11 +25,13 @@ export async function InsightsPreview() {
 
         <div className="mt-12">
           {posts.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <StaggerGrid className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
-                <BlogCard key={post.id} post={post} />
+                <div key={post.id} data-stagger-item>
+                  <BlogCard post={post} />
+                </div>
               ))}
-            </div>
+            </StaggerGrid>
           ) : (
             <BlogEmptyState />
           )}

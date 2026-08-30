@@ -46,6 +46,7 @@
   --animate-dashflow: dashflow 1.4s linear infinite;
   --animate-pulse-soft: pulse-soft 2.8s ease-in-out infinite;
   --animate-rise: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-nav-dot: nav-dot-fade-in 200ms ease 100ms forwards, nav-dot-pulse 1s ease-in-out 100ms infinite;
 }
 
 @keyframes marquee {
@@ -83,6 +84,18 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes nav-dot-fade-in {
+  to {
+    opacity: 0.9;
+  }
+}
+
+@keyframes nav-dot-pulse {
+  50% {
+    opacity: 0.35;
   }
 }
 

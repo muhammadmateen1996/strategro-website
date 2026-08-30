@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion/Reveal";
 import { formatDate } from "@/lib/format";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/wordpress";
 import { JsonLd, articleSchema, breadcrumbSchema } from "@/lib/jsonld";
@@ -75,36 +76,38 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             <span>{post.title}</span>
           </nav>
 
-          <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.15em] text-gold-600">
-            <span>{post.categories[0]}</span>
-            <span aria-hidden="true">&middot;</span>
-            <time dateTime={post.date}>{formatDate(post.date)}</time>
-          </div>
-
-          <h1 className="mt-4 font-display text-3xl leading-[1.15] text-ink-950 sm:text-4xl">
-            {post.title}
-          </h1>
-          <p className="mt-4 text-sm text-ink-700/70">By {post.author}</p>
-
-          {post.featuredImage && (
-            <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-ink-900">
-              <Image
-                src={post.featuredImage.url}
-                alt={post.featuredImage.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 768px, 100vw"
-                className="object-cover"
-              />
+          <Reveal>
+            <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.15em] text-gold-600">
+              <span>{post.categories[0]}</span>
+              <span aria-hidden="true">&middot;</span>
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
             </div>
-          )}
+
+            <h1 className="mt-4 font-display text-3xl leading-[1.15] text-ink-950 sm:text-4xl">
+              {post.title}
+            </h1>
+            <p className="mt-4 text-sm text-ink-700/70">By {post.author}</p>
+
+            {post.featuredImage && (
+              <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-ink-900">
+                <Image
+                  src={post.featuredImage.url}
+                  alt={post.featuredImage.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 768px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            )}
+          </Reveal>
 
           <div
             className="prose prose-neutral mt-10 max-w-none prose-headings:font-display prose-a:text-gold-600 prose-a:no-underline hover:prose-a:underline"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
-          <div className="mt-14 flex flex-col items-start gap-4 rounded-2xl border border-ink-950/8 bg-white p-8 sm:flex-row sm:items-center sm:justify-between">
+          <Reveal className="mt-14 flex flex-col items-start gap-4 rounded-2xl border border-ink-950/8 bg-white p-8 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="font-display text-xl text-ink-950">
                 See what your business could automate first.
@@ -114,7 +117,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             <Button href="/contact" className="shrink-0">
               Book a call
             </Button>
-          </div>
+          </Reveal>
         </Container>
       </article>
     </>

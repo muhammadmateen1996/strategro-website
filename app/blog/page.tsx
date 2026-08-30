@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { BlogEmptyState } from "@/components/blog/EmptyState";
+import { StaggerGrid } from "@/components/motion/StaggerGrid";
 import { getPosts } from "@/lib/wordpress";
 import { JsonLd, breadcrumbSchema } from "@/lib/jsonld";
 import { siteConfig } from "@/lib/site-config";
@@ -40,11 +41,13 @@ export default async function BlogIndexPage() {
       <section className="bg-paper-50 py-20">
         <Container>
           {posts.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <StaggerGrid className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
-                <BlogCard key={post.id} post={post} />
+                <div key={post.id} data-stagger-item>
+                  <BlogCard post={post} />
+                </div>
               ))}
-            </div>
+            </StaggerGrid>
           ) : (
             <BlogEmptyState />
           )}

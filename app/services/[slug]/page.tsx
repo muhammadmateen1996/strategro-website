@@ -5,6 +5,9 @@ import { Check, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
+import { StaggerGrid } from "@/components/motion/StaggerGrid";
+import { ConnectedSteps } from "@/components/motion/ConnectedSteps";
+import { CtaSection } from "@/components/sections/CtaSection";
 import { ServiceHeroDiagram } from "@/components/graphics/ServiceHeroDiagram";
 import { getRelatedServices, getServiceBySlug, services } from "@/content/services";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/jsonld";
@@ -87,7 +90,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
 
       <section className="bg-paper-50 py-20">
         <Container className="grid gap-12 lg:grid-cols-2">
-          <div>
+          <Reveal>
             <h2 className="font-display text-2xl text-ink-950">Where this usually shows up</h2>
             <ul className="mt-6 space-y-4">
               {service.problems.map((problem) => (
@@ -97,8 +100,8 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
                 </li>
               ))}
             </ul>
-          </div>
-          <div>
+          </Reveal>
+          <Reveal delay={0.1}>
             <h2 className="font-display text-2xl text-ink-950">Is this the right fit?</h2>
             <ul className="mt-6 space-y-4">
               {service.decisionCriteria.map((criterion) => (
@@ -108,49 +111,53 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       <section className="bg-paper-100 py-20">
         <Container>
           <h2 className="font-display text-2xl text-ink-950 sm:text-3xl">What&rsquo;s included</h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            {service.whatItIncludes.map((item, index) => (
-              <Reveal key={item.title} delay={index * 0.05}>
-                <div className="h-full rounded-2xl border border-ink-950/8 bg-paper-50 p-7">
-                  <h3 className="font-display text-lg text-ink-950">{item.title}</h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-ink-700">{item.description}</p>
-                </div>
-              </Reveal>
+          <StaggerGrid className="mt-10 grid gap-6 sm:grid-cols-2">
+            {service.whatItIncludes.map((item) => (
+              <div key={item.title} data-stagger-item className="h-full rounded-2xl border border-ink-950/8 bg-paper-50 p-7">
+                <h3 className="font-display text-lg text-ink-950">{item.title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-ink-700">{item.description}</p>
+              </div>
             ))}
-          </div>
+          </StaggerGrid>
         </Container>
       </section>
 
       <section className="bg-ink-950 py-20">
         <Container>
           <h2 className="font-display text-2xl text-paper-50 sm:text-3xl">The workflow</h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {service.workflow.map((stage, index) => (
-              <div key={stage.step} className="rounded-2xl border border-paper-50/10 bg-ink-900 p-6">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-500">
-                  0{index + 1}
-                </span>
-                <h3 className="mt-3 font-display text-lg text-paper-50">{stage.step}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-paper-100/70">{stage.description}</p>
-              </div>
-            ))}
-          </div>
+          <ConnectedSteps className="mt-14">
+            <div className="grid gap-6 pt-8 sm:grid-cols-2 lg:grid-cols-4">
+              {service.workflow.map((stage, index) => (
+                <div
+                  key={stage.step}
+                  data-diagram-part="step"
+                  className="rounded-2xl border border-paper-50/10 bg-ink-900 p-6"
+                >
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-500">
+                    0{index + 1}
+                  </span>
+                  <h3 className="mt-3 font-display text-lg text-paper-50">{stage.step}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-paper-100/70">{stage.description}</p>
+                </div>
+              ))}
+            </div>
+          </ConnectedSteps>
         </Container>
       </section>
 
       <section className="bg-paper-50 py-20">
         <Container className="max-w-3xl">
           <h2 className="font-display text-2xl text-ink-950 sm:text-3xl">Common questions</h2>
-          <div className="mt-8 divide-y divide-ink-950/10 border-t border-ink-950/10">
+          <StaggerGrid className="mt-8 divide-y divide-ink-950/10 border-t border-ink-950/10">
             {service.faqs.map((faq) => (
-              <details key={faq.question} className="group py-5">
+              <details key={faq.question} data-stagger-item className="group py-5">
                 <summary className="focus-ring flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-ink-950">
                   {faq.question}
                   <span className="shrink-0 text-gold-600 transition-transform group-open:rotate-45">+</span>
@@ -158,7 +165,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
                 <p className="mt-3 text-sm leading-relaxed text-ink-700">{faq.answer}</p>
               </details>
             ))}
-          </div>
+          </StaggerGrid>
         </Container>
       </section>
 
@@ -166,10 +173,11 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
         <section className="bg-paper-100 py-20">
           <Container>
             <h2 className="font-display text-2xl text-ink-950 sm:text-3xl">Often paired with</h2>
-            <div className="mt-8 grid gap-6 sm:grid-cols-2">
+            <StaggerGrid className="mt-8 grid gap-6 sm:grid-cols-2">
               {related.map((relatedService) => (
                 <Link
                   key={relatedService.slug}
+                  data-stagger-item
                   href={`/services/${relatedService.slug}`}
                   className="focus-ring group flex items-center justify-between gap-4 rounded-2xl border border-ink-950/8 bg-paper-50 p-6 transition-colors hover:border-gold-500/40"
                 >
@@ -180,23 +188,12 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
                   <ArrowRight className="size-4 shrink-0 text-gold-600 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </Link>
               ))}
-            </div>
+            </StaggerGrid>
           </Container>
         </section>
       )}
 
-      <section className="bg-gold-500 py-16">
-        <Container className="text-center">
-          <h2 className="font-display text-3xl text-ink-950">
-            See What Your Business Could Automate First.
-          </h2>
-          <div className="mt-7 flex justify-center">
-            <Button href="/contact" className="bg-ink-950 text-paper-50 hover:bg-ink-900">
-              Book an AI Systems Audit
-            </Button>
-          </div>
-        </Container>
-      </section>
+      <CtaSection />
     </>
   );
 }
