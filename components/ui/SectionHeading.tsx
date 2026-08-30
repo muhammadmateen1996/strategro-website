@@ -38,7 +38,7 @@ export function SectionHeading({
       )}
       <Tag
         className={cn(
-          "font-display text-3xl leading-[1.1] sm:text-4xl lg:text-[2.75rem]",
+          "font-display text-3xl leading-[1.04] tracking-tight sm:text-4xl lg:text-5xl",
           tone === "dark" ? "text-ink-950" : "text-paper-50"
         )}
       >

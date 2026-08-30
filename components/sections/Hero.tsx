@@ -13,18 +13,18 @@ export function Hero() {
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(ellipse_at_top,_rgba(201,154,68,0.14),_transparent_60%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[620px] bg-[radial-gradient(ellipse_at_top,_rgba(201,154,68,0.2),_transparent_62%)]"
       />
-      <Spotlight />
+      <Spotlight size={620} />
       <Container className="relative grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-8">
         <div>
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-500/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-400 backdrop-blur-sm">
             Signal to System
           </p>
-          <h1 className="font-display text-4xl leading-[1.08] text-paper-50 sm:text-5xl lg:text-[3.4rem]">
+          <h1 className="font-display text-5xl leading-[1.02] tracking-tight text-paper-50 sm:text-6xl lg:text-[4rem]">
             Turn Operational Drag Into Intelligent Systems.
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper-100/75">
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-paper-100/75">
             We build the AI systems that catch what&rsquo;s slipping through the cracks &mdash;
             the calls, the messages, the leads &mdash; and turn them into one system that
             keeps working after everyone else has gone home.

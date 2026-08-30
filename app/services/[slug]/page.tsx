@@ -154,15 +154,21 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
 
       <section className="bg-paper-50 py-20">
         <Container className="max-w-3xl">
-          <h2 className="font-display text-2xl text-ink-950 sm:text-3xl">Common questions</h2>
+          <h2 className="font-display text-2xl tracking-tight text-ink-950 sm:text-3xl">Common questions</h2>
           <StaggerGrid className="mt-8 divide-y divide-ink-950/10 border-t border-ink-950/10">
             {service.faqs.map((faq) => (
-              <details key={faq.question} data-stagger-item className="group py-5">
-                <summary className="focus-ring flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-ink-950">
+              <details
+                key={faq.question}
+                data-stagger-item
+                className="group py-6 transition-colors hover:bg-gold-500/[0.03]"
+              >
+                <summary className="focus-ring flex cursor-pointer list-none items-center justify-between gap-6 text-base font-semibold text-ink-950 transition-colors group-hover:text-gold-700 sm:text-lg">
                   {faq.question}
-                  <span className="shrink-0 text-gold-600 transition-transform group-open:rotate-45">+</span>
+                  <span className="relative flex size-7 shrink-0 items-center justify-center rounded-full border border-ink-950/10 text-gold-600 transition-all duration-300 group-open:rotate-45 group-open:border-gold-500/40 group-hover:border-gold-500/40">
+                    +
+                  </span>
                 </summary>
-                <p className="mt-3 text-sm leading-relaxed text-ink-700">{faq.answer}</p>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-700">{faq.answer}</p>
               </details>
             ))}
           </StaggerGrid>
