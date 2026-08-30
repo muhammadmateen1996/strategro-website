@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { Magnetic } from "@/components/motion/Magnetic";
 
 type ButtonVariant = "primary" | "secondary" | "ghost";
 
@@ -47,17 +48,22 @@ export function Button({
     </>
   );
 
+  const isMagnetic = variant === "primary" || variant === "secondary";
+
   if (external) {
-    return (
+    const link = (
       <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
         {content}
       </a>
     );
+    return isMagnetic ? <Magnetic className="inline-block">{link}</Magnetic> : link;
   }
 
-  return (
+  const link = (
     <Link href={href} className={classes}>
       {content}
     </Link>
   );
+
+  return isMagnetic ? <Magnetic className="inline-block">{link}</Magnetic> : link;
 }

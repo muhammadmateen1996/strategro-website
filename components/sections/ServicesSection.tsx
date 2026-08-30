@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StaggerGrid } from "@/components/motion/StaggerGrid";
+import { TiltCard } from "@/components/motion/TiltCard";
 import { services } from "@/content/services";
 
 export function ServicesSection() {
@@ -21,19 +22,21 @@ export function ServicesSection() {
               key={service.slug}
               data-stagger-item
               href={`/services/${service.slug}`}
-              className="focus-ring group flex h-full flex-col justify-between rounded-2xl border border-ink-950/8 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold-500/40 hover:shadow-xl hover:shadow-ink-950/5"
+              className="focus-ring group block h-full rounded-2xl border border-ink-950/8 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-gold-500/40 hover:shadow-xl hover:shadow-ink-950/5"
             >
-              <div>
-                <span className="mb-5 flex size-11 items-center justify-center rounded-xl bg-ink-950 text-gold-400 transition-transform duration-300 group-hover:scale-110">
-                  <service.icon className="size-5" aria-hidden="true" />
+              <TiltCard className="flex h-full flex-col justify-between rounded-[inherit] p-7">
+                <div>
+                  <span className="mb-5 flex size-11 items-center justify-center rounded-xl bg-ink-950 text-gold-400 transition-transform duration-300 group-hover:scale-110">
+                    <service.icon className="size-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="font-display text-xl text-ink-950">{service.name}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-ink-700">{service.outcome}</p>
+                </div>
+                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-gold-600">
+                  Learn more
+                  <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                 </span>
-                <h3 className="font-display text-xl text-ink-950">{service.name}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-ink-700">{service.outcome}</p>
-              </div>
-              <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-gold-600">
-                Learn more
-                <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-              </span>
+              </TiltCard>
             </Link>
           ))}
 

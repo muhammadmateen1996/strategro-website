@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { ScrollCinematic } from "@/components/motion/ScrollCinematic";
+import { Spotlight } from "@/components/motion/Spotlight";
 import { SignalFlowDiagram } from "@/components/graphics/SignalFlowDiagram";
 import { siteConfig } from "@/lib/site-config";
 
@@ -14,6 +15,7 @@ export function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(ellipse_at_top,_rgba(201,154,68,0.14),_transparent_60%)]"
       />
+      <Spotlight />
       <Container className="relative grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-8">
         <div>
           <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-500/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">
