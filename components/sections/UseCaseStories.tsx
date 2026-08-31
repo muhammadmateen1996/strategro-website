@@ -20,7 +20,7 @@ export function UseCaseStories() {
             <article
               key={story.slug}
               data-stagger-item
-              className="flex h-full flex-col rounded-2xl border border-ink-950/8 bg-paper-50 p-7"
+              className="card-glow flex h-full flex-col rounded-2xl border border-ink-950/8 bg-paper-50 p-7 transition-colors duration-300 hover:border-gold-500/30"
             >
                 <span
                   className={cn(
@@ -44,7 +44,7 @@ export function UseCaseStories() {
                   </ol>
 
                   {story.results && (
-                    <div className="rounded-xl bg-ink-950 p-4">
+                    <div className="rounded-xl border border-gold-500/15 bg-ink-950 p-4 shadow-[0_0_30px_-14px_rgba(201,154,68,0.5)]">
                       <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-400">
                         Results
                       </p>

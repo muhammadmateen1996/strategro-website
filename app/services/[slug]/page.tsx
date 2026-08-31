@@ -129,8 +129,12 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
         </Container>
       </section>
 
-      <section className="bg-ink-950 py-20">
-        <Container>
+      <section className="relative overflow-hidden bg-ink-950 py-20">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-32 top-1/2 size-[480px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(201,154,68,0.1),_transparent_65%)] blur-3xl"
+        />
+        <Container className="relative">
           <h2 className="font-display text-2xl text-paper-50 sm:text-3xl">The workflow</h2>
           <ConnectedSteps className="mt-14">
             <div className="grid gap-6 pt-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -138,7 +142,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
                 <div
                   key={stage.step}
                   data-diagram-part="step"
-                  className="rounded-2xl border border-paper-50/10 bg-ink-900 p-6"
+                  className="glass-dark card-glow rounded-2xl p-6"
                 >
                   <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-500">
                     0{index + 1}

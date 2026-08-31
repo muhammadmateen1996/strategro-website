@@ -140,3 +140,26 @@ body {
 .font-display {
   font-family: var(--font-display);
 }
+
+/* Frosted glass surface for cards on dark sections, with a gold-tinted
+   hover state -- used for glanceable panels (workflow steps, dropdowns,
+   friction cards) that sit over an ambient glow rather than a flat fill. */
+.glass-dark {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+}
+.glass-dark:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(201, 154, 68, 0.32);
+}
+
+/* Soft gold radiance on hover, for interactive cards on any background. */
+.card-glow {
+  transition: box-shadow 300ms ease;
+}
+.card-glow:hover {
+  box-shadow: 0 0 56px -16px rgba(201, 154, 68, 0.45);
+}

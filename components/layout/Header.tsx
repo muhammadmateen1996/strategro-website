@@ -75,7 +75,7 @@ export function Header() {
             </button>
             {servicesOpen && (
               <div className="absolute left-1/2 top-full w-96 -translate-x-1/2 pt-3">
-                <div className="rounded-2xl border border-paper-50/10 bg-ink-900 p-3 shadow-2xl shadow-black/40">
+                <div className="rounded-2xl border border-white/10 bg-ink-900/95 p-3 shadow-2xl shadow-black/40 backdrop-blur-xl">
                   <Link
                     href="/services"
                     className="focus-ring block rounded-xl px-4 py-2.5 text-sm font-semibold text-gold-400 hover:bg-ink-800"

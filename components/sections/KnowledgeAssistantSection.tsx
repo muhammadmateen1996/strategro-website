@@ -6,8 +6,12 @@ import { DocumentAnswerDiagram } from "@/components/graphics/DocumentAnswerDiagr
 
 export function KnowledgeAssistantSection() {
   return (
-    <section className="bg-ink-950 py-24 sm:py-28">
-      <Container className="grid gap-14 lg:grid-cols-2 lg:items-center lg:gap-12">
+    <section className="relative overflow-hidden bg-ink-950 py-24 sm:py-28">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 size-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(201,154,68,0.08),_transparent_65%)] blur-3xl"
+      />
+      <Container className="relative grid gap-14 lg:grid-cols-2 lg:items-center lg:gap-12">
         <div>
           <SectionHeading
             eyebrow="Internal Knowledge"
@@ -15,7 +19,7 @@ export function KnowledgeAssistantSection() {
             title="Your documents, answering questions on their own."
             description="A RAG knowledge assistant reads your policies, procedures, and internal documents, and gives staff accurate, sourced answers instead of a folder to search through."
           />
-          <ul className="mt-8 space-y-4">
+          <ul className="glass-dark mt-8 space-y-4 rounded-2xl p-6">
             {[
               "Every answer is grounded in a real document, not a guess.",
               "The assistant declines to answer when nothing relevant exists.",

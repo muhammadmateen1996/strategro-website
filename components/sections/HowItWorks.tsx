@@ -71,8 +71,12 @@ export function HowItWorks() {
   }, []);
 
   return (
-    <section className="bg-ink-950 py-24 sm:py-28">
-      <Container>
+    <section className="relative overflow-hidden bg-ink-950 py-24 sm:py-28">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-40 bottom-0 size-[560px] rounded-full bg-[radial-gradient(circle,_rgba(201,154,68,0.09),_transparent_65%)] blur-3xl"
+      />
+      <Container className="relative">
         <SectionHeading
           eyebrow="How Strategro Works"
           tone="light"
@@ -126,7 +130,7 @@ export function HowItWorks() {
             ))}
           </div>
 
-          <div className="mt-10 rounded-2xl border border-paper-50/10 bg-ink-900 p-8 sm:p-10">
+          <div className="glass-dark mt-10 rounded-2xl p-8 sm:p-10">
             {steps.map((step, index) => (
               <div
                 key={step.label}

@@ -47,7 +47,7 @@ export default function ServicesIndexPage() {
                 key={service.slug}
                 data-stagger-item
                 href={`/services/${service.slug}`}
-                className="focus-ring group block h-full rounded-2xl border border-ink-950/8 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-gold-500/40 hover:shadow-xl hover:shadow-ink-950/5"
+                className="card-glow focus-ring group block h-full rounded-2xl border border-ink-950/8 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-gold-500/40"
               >
                 <TiltCard className="flex h-full flex-col rounded-[inherit] p-8">
                   <span className="mb-5 flex size-12 items-center justify-center rounded-xl bg-ink-950 text-gold-400">

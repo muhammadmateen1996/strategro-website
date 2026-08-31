@@ -32,8 +32,12 @@ const frictionPoints = [
 
 export function ProblemsSection() {
   return (
-    <section className="bg-ink-950 py-24 sm:py-28">
-      <Container>
+    <section className="relative overflow-hidden bg-ink-950 py-24 sm:py-28">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-40 top-0 size-[560px] rounded-full bg-[radial-gradient(circle,_rgba(201,154,68,0.1),_transparent_65%)] blur-3xl"
+      />
+      <Container className="relative">
         <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-12">
           <div>
             <SectionHeading
@@ -47,11 +51,13 @@ export function ProblemsSection() {
             </div>
           </div>
 
-          <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {frictionPoints.map((point, index) => (
               <Reveal key={point.title} delay={index * 0.05}>
-                <h3 className="font-display text-lg text-paper-50">{point.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-paper-100/70">{point.description}</p>
+                <div className="glass-dark card-glow h-full rounded-2xl p-5">
+                  <h3 className="font-display text-lg text-paper-50">{point.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-paper-100/70">{point.description}</p>
+                </div>
               </Reveal>
             ))}
           </div>
