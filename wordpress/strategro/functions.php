@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'STRATEGRO_VERSION', '1.0.0' );
+define( 'STRATEGRO_VERSION', '1.1.0' );
 define( 'STRATEGRO_DIR', get_template_directory() );
 define( 'STRATEGRO_URI', get_template_directory_uri() );
 
@@ -18,6 +18,9 @@ require STRATEGRO_DIR . '/inc/menus.php';
 require STRATEGRO_DIR . '/inc/shortcodes.php';
 require STRATEGRO_DIR . '/inc/template-tags.php';
 require STRATEGRO_DIR . '/inc/setup.php';
+if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+	require STRATEGRO_DIR . '/inc/installer.php';
+}
 
 add_action( 'after_setup_theme', 'strategro_setup' );
 function strategro_setup() {

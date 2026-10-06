@@ -1,6 +1,6 @@
 # Strategro on WordPress + Elementor
 
-The Strategro site as a WordPress theme plus an Elementor kit. Every page is
+The Strategro site as a WordPress theme with a one-click page builder. Every page is
 built from normal Elementor containers and free widgets, so you can edit any
 text, image, button or section by dragging and dropping. The motion effects
 live in the theme and are switched on per element with a CSS class.
@@ -8,31 +8,31 @@ live in the theme and are switched on per element with a CSS class.
 Built and tested against **Elementor 3.35.6** (works with or without
 Elementor Pro) and WordPress 7.1.
 
-## What's in `dist/`
-
-| File | What it is | Where it goes |
-|---|---|---|
-| `strategro-theme.zip` | Header, footer, brand styling, motion effects, blog layout | Appearance › Themes › Add New › Upload Theme |
-| `strategro-elementor-kit.zip` | All pages, blog posts, menus, global colours and fonts | Elementor › Tools › Import / Export Kit › Import |
-
 ## Install
 
-> Try it on a staging copy first. Importing the kit **replaces your Elementor
-> global colours and fonts** and adds new pages. It does not delete your
-> existing pages, but pages with the same address get a `-2` suffix.
+Everything is in one file: **`dist/strategro-theme.zip`**. No Elementor
+Pro, no kit import, no template import needed.
 
 1. **Back up the site** (your host's backup tool, or a plugin like UpdraftPlus).
-2. **Check Flexbox Containers are on:** Elementor › Settings › Features ›
-   *Flexbox Container* = Active (it's the default on 3.35).
-3. **Install the theme:** Appearance › Themes › Add New › Upload Theme ›
-   `strategro-theme.zip` › Install › **Activate**.
-4. **Import the kit:** Elementor › Tools › Import / Export Kit › Import a Kit
-   › `strategro-elementor-kit.zip`. Include everything when asked.
-5. **Click "Finish setup"** in the blue notice at the top of the dashboard.
-   It sets Insights as the blog page, connects the menus to the header and
-   footer, and fixes the Privacy Policy address. It lists exactly what it
-   changed.
-6. **Settings › Permalinks** › choose *Post name* › Save (if it isn't already).
+2. **Upload the theme:** Appearance › Themes › Add New › Upload Theme ›
+   `strategro-theme.zip` › Install. If you installed an earlier version, choose
+   **Replace active with uploaded**. Then **Activate**.
+3. **Build the pages:** Appearance › **Strategro Setup** › **Build my Strategro
+   site**. It lists exactly what it did when it finishes.
+
+What the button does:
+- Creates Home, Products, Custom Builds, About, Insights, Contact, Privacy
+  Policy and Terms as normal Elementor pages, plus three starter blog posts.
+- Creates header and footer menus named "Strategro …" (your existing menus
+  are left alone).
+- Sets Elementor's global colours and fonts to the Strategro brand, and
+  switches on Flexbox Containers if they're off.
+- Makes Home the homepage and Insights the blog page.
+- **Deletes nothing.** If a page already uses one of those addresses (say
+  `/about/`), it's kept as a draft called "Previous: …" at `/about-old/`.
+
+Running it again rebuilds the Strategro pages to their original design, so
+only do that before you start editing them.
 
 ## Day-to-day editing
 
@@ -107,16 +107,12 @@ turn on "reduce motion" on their device get a still page.
 Gold shimmering words: in a Heading, wrap them as
 `<span class="sg-gradient-text">your words</span>`.
 
-## Rebuilding the kit (developers)
+## Developers
 
-`build/build-site.php` generates every page as Elementor data from
-`build/content.json` (exported from the Next.js site's content) and
-`build/legal.json`. With WordPress, Elementor 3.35.6 and the theme installed:
+The page designs and installer live in `strategro/inc/installer.php`, with
+content in `strategro/data/` (exported from the Next.js site). To run the
+same installer from the command line:
 
 ```bash
-wp eval-file wordpress/build/build-site.php --user=admin
-wp elementor kit export wordpress/dist/strategro-elementor-kit.zip
+wp eval-file wordpress/build/build-site.php --user=<admin>
 ```
-
-The theme folder must stay named `strategro`. The kit records that name and
-switches the site to it on import.

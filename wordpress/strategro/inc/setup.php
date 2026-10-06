@@ -1,18 +1,8 @@
 <?php
 /**
- * One-click "Finish setup" after importing the Strategro Elementor kit.
- *
- * Elementor's kit import brings in pages, posts and menus but leaves a few
- * WordPress settings untouched. This shows a notice to administrators with
- * a button that:
- *   - sets the "Insights" page as the blog (posts) page,
- *   - sets "Home" as the homepage if no homepage is chosen yet,
- *   - connects the imported menus to the theme's header and footer slots
- *     (only slots that are still empty),
- *   - if the import created "privacy-policy-2" because WordPress's own
- *     unpublished draft held the "privacy-policy" address, removes that
- *     never-published draft and gives the real page its proper address.
- *     A published privacy page is never touched.
+ * Appearance > Strategro Setup: builds every Strategro page, post, menu
+ * and Elementor brand setting with one click, so no Elementor import tool
+ * (or Elementor Pro) is needed.
  *
  * @package Strategro
  */
@@ -21,167 +11,97 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function strategro_setup_needed() {
-	if ( get_option( 'strategro_setup_done' ) ) {
-		return false;
-	}
-	return (bool) get_page_by_path( 'insights' ) || (bool) wp_get_nav_menu_object( 'Header' );
+add_action( 'admin_menu', 'strategro_setup_menu' );
+function strategro_setup_menu() {
+	add_theme_page( __( 'Strategro Setup', 'strategro' ), __( 'Strategro Setup', 'strategro' ), 'manage_options', 'strategro-setup', 'strategro_setup_page' );
 }
 
 add_action( 'admin_notices', 'strategro_setup_notice' );
 function strategro_setup_notice() {
-	if ( ! current_user_can( 'manage_options' ) ) {
+	$screen = get_current_screen();
+	if ( ! current_user_can( 'manage_options' ) || get_option( 'strategro_installed_version' ) || ( $screen && 'appearance_page_strategro-setup' === $screen->id ) ) {
 		return;
 	}
+	printf(
+		'<div class="notice notice-info"><p><strong>%s</strong> %s</p><p><a class="button button-primary" href="%s">%s</a></p></div>',
+		esc_html__( 'The Strategro theme is active.', 'strategro' ),
+		esc_html__( 'One more step: build the Strategro pages.', 'strategro' ),
+		esc_url( admin_url( 'themes.php?page=strategro-setup' ) ),
+		esc_html__( 'Open Strategro Setup', 'strategro' )
+	);
+}
 
-	if ( isset( $_GET['strategro-setup'] ) && 'done' === $_GET['strategro-setup'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-		$log = get_transient( 'strategro_setup_log' );
-		echo '<div class="notice notice-success is-dismissible"><p><strong>' . esc_html__( 'Strategro setup finished.', 'strategro' ) . '</strong></p>';
-		if ( $log ) {
-			echo '<ul style="list-style:disc;margin-left:20px">';
-			foreach ( $log as $line ) {
-				echo '<li>' . esc_html( $line ) . '</li>';
-			}
-			echo '</ul>';
-		}
-		echo '</div>';
-		return;
-	}
-
-	if ( ! strategro_setup_needed() ) {
-		return;
-	}
-
-	$url = wp_nonce_url( admin_url( 'admin-post.php?action=strategro_finish_setup' ), 'strategro_finish_setup' );
+function strategro_setup_page() {
+	$result = get_transient( 'strategro_setup_result' );
+	delete_transient( 'strategro_setup_result' );
+	$elementor = did_action( 'elementor/loaded' );
 	?>
-	<div class="notice notice-info">
-		<p><strong><?php esc_html_e( 'Strategro is almost ready.', 'strategro' ); ?></strong>
-		<?php esc_html_e( 'Finish setup to make Insights your blog page, connect the imported menus to the header and footer, and give the Privacy Policy page its proper address.', 'strategro' ); ?></p>
-		<p>
-			<a class="button button-primary" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'Finish setup', 'strategro' ); ?></a>
-			<a class="button" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=strategro_skip_setup' ), 'strategro_skip_setup' ) ); ?>"><?php esc_html_e( 'Dismiss', 'strategro' ); ?></a>
-		</p>
+	<div class="wrap">
+		<h1><?php esc_html_e( 'Strategro Setup', 'strategro' ); ?></h1>
+
+		<?php if ( $result && ! empty( $result['error'] ) ) : ?>
+			<div class="notice notice-error"><p><strong><?php esc_html_e( 'Setup could not finish:', 'strategro' ); ?></strong> <?php echo esc_html( $result['error'] ); ?></p></div>
+		<?php elseif ( $result ) : ?>
+			<div class="notice notice-success">
+				<p><strong><?php esc_html_e( 'Done. Your Strategro site is built.', 'strategro' ); ?></strong>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank"><?php esc_html_e( 'View the site', 'strategro' ); ?> &rarr;</a></p>
+				<ul style="list-style:disc;margin-left:20px">
+					<?php foreach ( $result['log'] as $line ) : ?>
+						<li><?php echo esc_html( $line ); ?></li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		<?php endif; ?>
+
+		<div class="card" style="max-width:720px">
+			<h2><?php esc_html_e( 'Build the Strategro pages', 'strategro' ); ?></h2>
+			<p><?php esc_html_e( 'This creates everything in one go, using only free Elementor widgets (Elementor Pro is not needed):', 'strategro' ); ?></p>
+			<ul style="list-style:disc;margin-left:20px">
+				<li><?php esc_html_e( 'Pages: Home, Products, Custom Builds, About, Insights, Contact, Privacy Policy, Terms. All editable with Elementor.', 'strategro' ); ?></li>
+				<li><?php esc_html_e( 'Three starter blog posts (skipped if you already have posts at the same address).', 'strategro' ); ?></li>
+				<li><?php esc_html_e( 'Header and footer menus, named "Strategro ..." so your existing menus are untouched.', 'strategro' ); ?></li>
+				<li><?php esc_html_e( 'Elementor global colours and fonts set to the Strategro brand.', 'strategro' ); ?></li>
+				<li><?php esc_html_e( 'Home becomes the homepage and Insights the blog page.', 'strategro' ); ?></li>
+			</ul>
+			<p><strong><?php esc_html_e( 'Nothing is deleted.', 'strategro' ); ?></strong>
+			<?php esc_html_e( 'If you already have a page at one of those addresses (for example /about/), it is kept as a draft renamed "Previous: ..." at /about-old/, so you can copy anything across.', 'strategro' ); ?></p>
+			<p><?php esc_html_e( 'Running it again later rebuilds the Strategro pages to their original design, so do that only before you start editing them.', 'strategro' ); ?></p>
+
+			<?php if ( ! $elementor ) : ?>
+				<p class="notice notice-warning" style="padding:10px"><?php esc_html_e( 'Activate the Elementor plugin first (Plugins > Installed Plugins).', 'strategro' ); ?></p>
+			<?php else : ?>
+				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+					<input type="hidden" name="action" value="strategro_install">
+					<?php wp_nonce_field( 'strategro_install' ); ?>
+					<?php
+					submit_button(
+						get_option( 'strategro_installed_version' ) ? __( 'Rebuild the Strategro pages', 'strategro' ) : __( 'Build my Strategro site', 'strategro' ),
+						'primary large',
+						'submit',
+						false
+					);
+					?>
+				</form>
+			<?php endif; ?>
+		</div>
 	</div>
 	<?php
 }
 
-add_action( 'admin_post_strategro_skip_setup', 'strategro_skip_setup' );
-function strategro_skip_setup() {
-	check_admin_referer( 'strategro_skip_setup' );
-	if ( current_user_can( 'manage_options' ) ) {
-		update_option( 'strategro_setup_done', 1 );
-	}
-	wp_safe_redirect( admin_url() );
-	exit;
-}
-
-add_action( 'admin_post_strategro_finish_setup', 'strategro_finish_setup_request' );
-function strategro_finish_setup_request() {
-	check_admin_referer( 'strategro_finish_setup' );
+add_action( 'admin_post_strategro_install', 'strategro_install_request' );
+function strategro_install_request() {
+	check_admin_referer( 'strategro_install' );
 	if ( ! current_user_can( 'manage_options' ) ) {
 		wp_die( esc_html__( 'You are not allowed to change site settings.', 'strategro' ) );
 	}
-	set_transient( 'strategro_setup_log', strategro_finish_setup(), 300 );
-	wp_safe_redirect( admin_url( '?strategro-setup=done' ) );
+
+	try {
+		$result = array( 'log' => strategro_install_site() );
+	} catch ( Throwable $e ) {
+		$result = array( 'error' => $e->getMessage() );
+	}
+
+	set_transient( 'strategro_setup_result', $result, 300 );
+	wp_safe_redirect( admin_url( 'themes.php?page=strategro-setup' ) );
 	exit;
-}
-
-/**
- * Applies the recommended settings and returns a list of what changed.
- */
-function strategro_finish_setup() {
-	$log = array();
-
-	$insights = get_page_by_path( 'insights' );
-	if ( $insights && (int) get_option( 'page_for_posts' ) !== $insights->ID ) {
-		update_option( 'page_for_posts', $insights->ID );
-		$log[] = __( 'Insights is now the blog page.', 'strategro' );
-	}
-
-	$home = get_page_by_path( 'home' );
-	if ( $home && ( 'page' !== get_option( 'show_on_front' ) || ! get_option( 'page_on_front' ) ) ) {
-		update_option( 'show_on_front', 'page' );
-		update_option( 'page_on_front', $home->ID );
-		$log[] = __( 'Home is now the homepage.', 'strategro' );
-	}
-
-	$slots     = array(
-		'primary'         => 'Header',
-		'footer_products' => 'Footer Products',
-		'footer_company'  => 'Footer Company',
-		'footer_legal'    => 'Footer Legal',
-	);
-	$locations = get_theme_mod( 'nav_menu_locations', array() );
-	foreach ( $slots as $location => $menu_name ) {
-		$menu = wp_get_nav_menu_object( $menu_name );
-		if ( $menu && empty( $locations[ $location ] ) ) {
-			$locations[ $location ] = $menu->term_id;
-			/* translators: %s: menu name */
-			$log[] = sprintf( __( 'Connected the "%s" menu.', 'strategro' ), $menu_name );
-		}
-	}
-	set_theme_mod( 'nav_menu_locations', $locations );
-
-	$imported = get_page_by_path( 'privacy-policy-2' );
-	$default  = get_page_by_path( 'privacy-policy' );
-	if ( $imported && 'publish' === $imported->post_status ) {
-		if ( $default && 'draft' === $default->post_status ) {
-			wp_delete_post( $default->ID, true );
-			$default = null;
-			$log[]   = __( 'Removed WordPress\'s unpublished sample privacy draft.', 'strategro' );
-		}
-		if ( ! $default ) {
-			wp_update_post(
-				array(
-					'ID'        => $imported->ID,
-					'post_name' => 'privacy-policy',
-				)
-			);
-			update_option( 'wp_page_for_privacy_policy', $imported->ID );
-			$log[] = __( 'Privacy Policy now lives at /privacy-policy/.', 'strategro' );
-		} else {
-			$log[] = __( 'You already have a published Privacy Policy, so the imported copy was left at /privacy-policy-2/ for you to compare.', 'strategro' );
-		}
-	}
-
-	// Elementor's kit import can point the Legal links at the wrong page (or
-	// drop one), so rebuild them from the real pages, linked by page rather
-	// than by address so they keep working if a page is renamed.
-	$legal_menu = wp_get_nav_menu_object( 'Footer Legal' );
-	if ( $legal_menu ) {
-		foreach ( (array) wp_get_nav_menu_items( $legal_menu->term_id ) as $item ) {
-			wp_delete_post( $item->ID, true );
-		}
-		$privacy_id = (int) get_option( 'wp_page_for_privacy_policy' );
-		$privacy    = $privacy_id ? get_post( $privacy_id ) : null;
-		$privacy    = ( $privacy && 'publish' === $privacy->post_status ) ? $privacy : get_page_by_path( 'privacy-policy' );
-		$pages      = array(
-			__( 'Privacy Policy', 'strategro' )   => $privacy,
-			__( 'Terms of Service', 'strategro' ) => get_page_by_path( 'terms' ),
-		);
-		foreach ( $pages as $title => $page ) {
-			if ( $page && 'publish' === $page->post_status ) {
-				wp_update_nav_menu_item(
-					$legal_menu->term_id,
-					0,
-					array(
-						'menu-item-title'     => $title,
-						'menu-item-object'    => 'page',
-						'menu-item-object-id' => $page->ID,
-						'menu-item-type'      => 'post_type',
-						'menu-item-status'    => 'publish',
-					)
-				);
-			}
-		}
-		$log[] = __( 'Linked the Legal footer menu to your Privacy Policy and Terms pages.', 'strategro' );
-	}
-
-	if ( ! $log ) {
-		$log[] = __( 'Everything was already set up.', 'strategro' );
-	}
-
-	flush_rewrite_rules();
-	update_option( 'strategro_setup_done', 1 );
-	return $log;
 }
