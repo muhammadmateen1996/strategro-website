@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { IntegrationsStrip } from "@/components/sections/IntegrationsStrip";
+import { ProductsSection } from "@/components/sections/ProductsSection";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { ProblemsSection } from "@/components/sections/ProblemsSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
@@ -22,6 +23,7 @@ export default function HomePage() {
     <>
       <Hero />
       <IntegrationsStrip />
+      <ProductsSection />
       <TrustBar />
       <ProblemsSection />
       <ServicesSection />

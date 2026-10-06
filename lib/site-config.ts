@@ -1,3 +1,5 @@
+import { products } from "@/content/products";
+
 export const siteConfig = {
   name: "Strategro",
   legalName: "Strategro Ltd",
@@ -39,6 +41,7 @@ export const primaryNav = [
 ] as const;
 
 export const footerNav = {
+  products: products.map((product) => ({ label: product.name, href: product.url, external: true })),
   services: [
     { label: "AI Workflow Automation", href: "/services/ai-workflow-automation" },
     { label: "AI Chatbots", href: "/services/ai-chatbots" },

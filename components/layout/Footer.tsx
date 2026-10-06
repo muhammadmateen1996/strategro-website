@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="border-t border-paper-50/10 bg-ink-950 text-paper-100">
       <Container className="py-16">
-        <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-5">
           <div className="col-span-2 sm:col-span-1">
             <Logo />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-paper-100/70">
@@ -18,6 +18,7 @@ export function Footer() {
             </p>
           </div>
 
+          <FooterColumn title="Products" links={footerNav.products} />
           <FooterColumn title="Services" links={footerNav.services} />
           <FooterColumn title="Company" links={footerNav.company} />
           <FooterColumn title="Legal" links={footerNav.legal} />
@@ -63,7 +64,7 @@ function FooterColumn({
   links,
 }: {
   title: string;
-  links: ReadonlyArray<{ label: string; href: string }>;
+  links: ReadonlyArray<{ label: string; href: string; external?: boolean }>;
 }) {
   return (
     <div>
@@ -71,12 +72,23 @@ function FooterColumn({
       <ul className="mt-4 space-y-3">
         {links.map((link) => (
           <li key={link.href}>
-            <Link
-              href={link.href}
-              className="focus-ring text-sm text-paper-100/80 transition-colors hover:text-gold-400"
-            >
-              {link.label}
-            </Link>
+            {link.external ? (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring text-sm text-paper-100/80 transition-colors hover:text-gold-400"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                href={link.href}
+                className="focus-ring text-sm text-paper-100/80 transition-colors hover:text-gold-400"
+              >
+                {link.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

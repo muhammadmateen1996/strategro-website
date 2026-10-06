@@ -12,6 +12,7 @@ import { Logo } from "@/components/layout/Logo";
 import { NavLoadingDot } from "@/components/motion/NavLoadingDot";
 
 const navLinks = [
+  { label: "Products", href: "/#products" },
   { label: "About", href: "/about" },
   { label: "Labs", href: "/labs/algorithmic-trading" },
   { label: "Insights", href: "/blog" },
