@@ -34,6 +34,13 @@ What the button does:
 Running it again rebuilds the Strategro pages to their original design, so
 only do that before you start editing them.
 
+## Seeing an old header or footer instead of the Strategro one?
+
+That's an Elementor Pro **Theme Builder** template from a previous design;
+it overrides the theme's header everywhere. Go to Templates › Theme Builder,
+open the old Header (and Footer), click **Display Conditions**, remove
+"Entire Site", and save. Or move the template to Trash.
+
 ## Day-to-day editing
 
 | To change… | Go to |
@@ -45,6 +52,7 @@ only do that before you start editing them.
 | Brand colours and fonts | Elementor › Site Settings › Global Colors / Global Fonts |
 | Blog posts | Posts › Add New (they appear on Insights and the homepage automatically) |
 | Page transitions + loader | Appearance › Customize › Strategro › *Animated page transitions* |
+| Sticky header on/off | Appearance › Customize › Strategro › *Sticky header* |
 
 The homepage's "latest insights" block is the shortcode
 `[strategro_latest_posts count="3"]`. Put it in any Shortcode widget to show

@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'STRATEGRO_VERSION', '1.1.1' );
+define( 'STRATEGRO_VERSION', '1.1.2' );
 define( 'STRATEGRO_DIR', get_template_directory() );
 define( 'STRATEGRO_URI', get_template_directory_uri() );
 

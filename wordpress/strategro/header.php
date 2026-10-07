@@ -29,7 +29,7 @@ $strategro_cta_url = 0 === strpos( $strategro_cta_url, '/' ) ? home_url( $strate
 	</div>
 <?php endif; ?>
 
-<header class="sg-header" data-sg-header>
+<header class="sg-header<?php echo strategro_mod( 'strategro_sticky_header' ) ? '' : ' sg-header--static'; ?>" data-sg-header>
 	<div class="sg-header__inner">
 		<?php strategro_brand(); ?>
 

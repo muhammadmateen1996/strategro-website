@@ -140,6 +140,10 @@ a {
 	transition: transform 0.45s var(--sg-ease), background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.sg-header--static {
+	position: relative;
+}
+
 .admin-bar .sg-header {
 	top: 32px;
 }

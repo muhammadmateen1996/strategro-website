@@ -23,6 +23,7 @@ function strategro_mod( $key ) {
 		'strategro_clara_key'        => 'pk_live_xZmsc3UKTuuVEhfcH-_SwLz-iQNsPAAi',
 		'strategro_clara_script'     => 'https://api.strategro.co.uk/embed/v1/clara.js',
 		'strategro_page_transitions' => true,
+		'strategro_sticky_header'    => true,
 	);
 	return get_theme_mod( $key, isset( $defaults[ $key ] ) ? $defaults[ $key ] : '' );
 }
@@ -66,6 +67,23 @@ function strategro_customize_register( $wp_customize ) {
 			)
 		);
 	}
+
+	$wp_customize->add_setting(
+		'strategro_sticky_header',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rest_sanitize_boolean',
+		)
+	);
+	$wp_customize->add_control(
+		'strategro_sticky_header',
+		array(
+			'label'       => __( 'Sticky header', 'strategro' ),
+			'description' => __( 'Keep the header at the top of the screen while scrolling.', 'strategro' ),
+			'type'        => 'checkbox',
+			'section'     => 'strategro',
+		)
+	);
 
 	$wp_customize->add_setting(
 		'strategro_page_transitions',
