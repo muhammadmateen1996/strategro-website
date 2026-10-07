@@ -32,3 +32,13 @@ function strategro_brand() {
 	strategro_mark();
 	printf( '<span class="sg-brand__name">%s</span></a>', esc_html( get_bloginfo( 'name' ) ) );
 }
+
+/** The four build steps used on the homepage and by the Scroll Steps widget. */
+function strategro_default_steps() {
+	return array(
+		array( 'Discover', 'We map how work actually moves today, including the manual steps nobody thinks to mention.' ),
+		array( 'Design', 'You see exactly what will change and where automation fits before any development starts.' ),
+		array( 'Build', 'We connect your tools and test against real scenarios with your team before going live.' ),
+		array( 'Optimise', 'Systems are reviewed against real usage, so accuracy improves as your business changes.' ),
+	);
+}

@@ -258,12 +258,7 @@ function strategro_b_cta( $title, $lead, $label = 'Book an AI Systems Audit', $u
 }
 
 function strategro_b_steps() {
-	return array(
-		array( 'Discover', 'We map how work actually moves today, including the manual steps nobody thinks to mention.' ),
-		array( 'Design', 'You see exactly what will change and where automation fits before any development starts.' ),
-		array( 'Build', 'We connect your tools and test against real scenarios with your team before going live.' ),
-		array( 'Optimise', 'Systems are reviewed against real usage, so accuracy improves as your business changes.' ),
-	);
+	return strategro_default_steps();
 }
 
 function strategro_b_steps_section( $steps, $title ) {

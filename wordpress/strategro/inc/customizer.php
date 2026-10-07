@@ -24,6 +24,7 @@ function strategro_mod( $key ) {
 		'strategro_clara_script'     => 'https://api.strategro.co.uk/embed/v1/clara.js',
 		'strategro_page_transitions' => true,
 		'strategro_sticky_header'    => true,
+		'strategro_builder_header'   => false,
 	);
 	return get_theme_mod( $key, isset( $defaults[ $key ] ) ? $defaults[ $key ] : '' );
 }
@@ -80,6 +81,23 @@ function strategro_customize_register( $wp_customize ) {
 		array(
 			'label'       => __( 'Sticky header', 'strategro' ),
 			'description' => __( 'Keep the header at the top of the screen while scrolling.', 'strategro' ),
+			'type'        => 'checkbox',
+			'section'     => 'strategro',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'strategro_builder_header',
+		array(
+			'default'           => false,
+			'sanitize_callback' => 'rest_sanitize_boolean',
+		)
+	);
+	$wp_customize->add_control(
+		'strategro_builder_header',
+		array(
+			'label'       => __( 'Use Elementor Pro Theme Builder headers and footers', 'strategro' ),
+			'description' => __( 'Off: the Strategro header and footer always show, even if an old Theme Builder template is still switched on. On: a Theme Builder header or footer replaces them wherever its display conditions apply.', 'strategro' ),
 			'type'        => 'checkbox',
 			'section'     => 'strategro',
 		)

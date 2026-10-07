@@ -3,7 +3,8 @@
 The Strategro site as a WordPress theme with a one-click page builder. Every page is
 built from normal Elementor containers and free widgets, so you can edit any
 text, image, button or section by dragging and dropping. The motion effects
-live in the theme and are switched on per element with a CSS class.
+live in the theme: switch them on for any element from the **Strategro
+Motion** panel, or drag in one of the eight **Strategro Motion** widgets.
 
 Built and tested against **Elementor 3.35.6** (works with or without
 Elementor Pro) and WordPress 7.1.
@@ -36,10 +37,21 @@ only do that before you start editing them.
 
 ## Seeing an old header or footer instead of the Strategro one?
 
-That's an Elementor Pro **Theme Builder** template from a previous design;
-it overrides the theme's header everywhere. Go to Templates › Theme Builder,
-open the old Header (and Footer), click **Display Conditions**, remove
-"Entire Site", and save. Or move the template to Trash.
+Update to theme 1.2.0 or later. The Strategro header and footer now always
+show, even if an Elementor Pro **Theme Builder** header from an earlier
+design is still switched on.
+
+To see what's left over, open Appearance › **Strategro Setup**. The
+**Header and footer check** box lists every old header or footer template,
+which tool made it, and an **Open** link. Delete any you don't need from
+Templates › Saved Templates (hover › Trash).
+
+Want an Elementor Pro Theme Builder header instead of the Strategro one?
+Appearance › Customize › Strategro › tick **Use Elementor Pro Theme Builder
+headers and footers**.
+
+Templates made with the separate *Elementor Header & Footer Builder* plugin
+can't be overridden by a theme; delete or deactivate them there.
 
 ## Day-to-day editing
 
@@ -53,6 +65,7 @@ open the old Header (and Footer), click **Display Conditions**, remove
 | Blog posts | Posts › Add New (they appear on Insights and the homepage automatically) |
 | Page transitions + loader | Appearance › Customize › Strategro › *Animated page transitions* |
 | Sticky header on/off | Appearance › Customize › Strategro › *Sticky header* |
+| Use a Theme Builder header instead | Appearance › Customize › Strategro › *Use Elementor Pro Theme Builder headers and footers* |
 
 The homepage's "latest insights" block is the shortcode
 `[strategro_latest_posts count="3"]`. Put it in any Shortcode widget to show
@@ -72,10 +85,46 @@ Leads go straight to Clara as normal; the theme doesn't touch the form.
 - The Contact page already has the Clara booking calendar and form; edit
   those two HTML widgets to swap snippets.
 
-## Motion effects
+## Strategro Motion panel
 
-Select any element in Elementor › **Advanced** › **CSS Classes** and add one
-or more of these (separate with spaces). Effects never run inside the
+Select any widget or container in Elementor › **Advanced** › **✦ Strategro
+Motion**. No class names to remember:
+
+| Setting | Options |
+|---|---|
+| Entrance | Fade up from blur, Words slide up (headings) |
+| Entrance delay | 0.1s to 0.6s, to play items in order |
+| While scrolling | Parallax (slower / faster) |
+| Cursor effect | 3D tilt with glare, Magnetic, Gold glow and lift |
+| Surface | Frosted glass (dark / light), White card, Orbiting light border |
+| Count up numbers | Numbers in the text count up from zero |
+| Section skin *(containers)* | Dark, Light, Warm paper, Gold, with readable text colours |
+| Children appear one by one *(containers)* | Staggered entrance |
+| Animated background *(containers)* | Signal network, Aurora light, Blueprint grid, Cursor spotlight |
+| Scroll children sideways forever *(containers)* | Turns the container into a ticker |
+
+## Strategro Motion widgets
+
+In the Elementor widget list, under **Strategro Motion**:
+
+| Widget | What it does |
+|---|---|
+| Split Headline | Headline with shimmering gold words; words slide up one by one |
+| Glow Button | Gold, outline or dark pill button with a light sweep, arrow and magnetic pull |
+| Stat Counter | Big gold number that counts up, with a label |
+| Motion Ticker | Endless sideways strip of words, pills or logos (speed, direction, pause on hover) |
+| Live Activity Feed | The "system activity" panel; new rows slide in every few seconds |
+| Motion Card | Product/feature card with icon, live badge, highlights, link, 3D tilt and glow |
+| Sideways Scroll Showcase | Row of cards that pins and scrolls sideways on desktop, swipes on phones |
+| Scroll Steps | Numbered steps that rise in turn as a gold line draws across |
+
+Tip: put the Showcase in a full-width container and give the container the
+Dark skin; the cards line up with the page edges automatically.
+
+## Motion classes (advanced)
+
+The panel and widgets use these CSS classes, which you can also type into
+**Advanced › CSS Classes** yourself (separate with spaces). Effects never run inside the
 Elementor editor, so everything stays visible while you edit. Visitors who
 turn on "reduce motion" on their device get a still page.
 

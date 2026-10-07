@@ -29,6 +29,7 @@ $strategro_cta_url = 0 === strpos( $strategro_cta_url, '/' ) ? home_url( $strate
 	</div>
 <?php endif; ?>
 
+<?php if ( ! strategro_elementor_location( 'header' ) ) : ?>
 <header class="sg-header<?php echo strategro_mod( 'strategro_sticky_header' ) ? '' : ' sg-header--static'; ?>" data-sg-header>
 	<div class="sg-header__inner">
 		<?php strategro_brand(); ?>
@@ -53,5 +54,6 @@ $strategro_cta_url = 0 === strpos( $strategro_cta_url, '/' ) ? home_url( $strate
 		<a class="sg-mobile__cta" href="<?php echo esc_url( $strategro_cta_url ); ?>"><?php echo esc_html( strategro_mod( 'strategro_cta_label' ) ); ?></a>
 	</div>
 </header>
+<?php endif; ?>
 
 <main id="sg-content" class="sg-main">

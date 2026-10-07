@@ -53,6 +53,8 @@ function strategro_setup_page() {
 			</div>
 		<?php endif; ?>
 
+		<?php strategro_setup_header_check(); ?>
+
 		<div class="card" style="max-width:720px">
 			<h2><?php esc_html_e( 'Build the Strategro pages', 'strategro' ); ?></h2>
 			<p><?php esc_html_e( 'This creates everything in one go, using only free Elementor widgets (Elementor Pro is not needed):', 'strategro' ); ?></p>
@@ -84,6 +86,47 @@ function strategro_setup_page() {
 				</form>
 			<?php endif; ?>
 		</div>
+	</div>
+	<?php
+}
+
+/**
+ * Lists header/footer templates left over from an earlier design, so an old
+ * header showing on the site can be traced to the template drawing it.
+ */
+function strategro_setup_header_check() {
+	$templates = strategro_header_overrides();
+	?>
+	<div class="card" style="max-width:720px">
+		<h2><?php esc_html_e( 'Header and footer check', 'strategro' ); ?></h2>
+		<?php if ( ! $templates ) : ?>
+			<p><?php esc_html_e( 'No other header or footer templates are switched on. The site uses the Strategro header and footer.', 'strategro' ); ?></p>
+		<?php else : ?>
+			<p><?php esc_html_e( 'These header and footer templates from an earlier design are still switched on:', 'strategro' ); ?></p>
+			<table class="widefat striped">
+				<thead><tr><th><?php esc_html_e( 'Template', 'strategro' ); ?></th><th><?php esc_html_e( 'Made with', 'strategro' ); ?></th><th><?php esc_html_e( 'On the site', 'strategro' ); ?></th><th></th></tr></thead>
+				<tbody>
+					<?php foreach ( $templates as $template ) : ?>
+						<tr>
+							<td><strong><?php echo esc_html( $template['title'] ? $template['title'] : __( '(no title)', 'strategro' ) ); ?></strong> (<?php echo esc_html( $template['type'] ); ?>)</td>
+							<td><?php echo esc_html( $template['source'] ); ?></td>
+							<td><?php echo $template['active'] ? '<strong style="color:#b32d2e">' . esc_html__( 'Replaces the Strategro one', 'strategro' ) . '</strong>' : esc_html__( 'Hidden (Strategro one shows)', 'strategro' ); ?></td>
+							<td><a href="<?php echo esc_url( $template['edit_url'] ); ?>"><?php esc_html_e( 'Open', 'strategro' ); ?></a></td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+			<p><?php esc_html_e( 'To remove one for good: Templates > Saved Templates (or Appearance > Elementor Header & Footer Builder), hover over it and click Trash.', 'strategro' ); ?></p>
+			<p>
+			<?php
+			printf(
+				/* translators: %s: Customizer link */
+				esc_html__( 'Elementor Pro Theme Builder templates only show if you switch on "Use Elementor Pro Theme Builder headers and footers" in %s.', 'strategro' ),
+				'<a href="' . esc_url( admin_url( 'customize.php?autofocus[section]=strategro' ) ) . '">' . esc_html__( 'Customize > Strategro', 'strategro' ) . '</a>'
+			);
+			?>
+			</p>
+		<?php endif; ?>
 	</div>
 	<?php
 }

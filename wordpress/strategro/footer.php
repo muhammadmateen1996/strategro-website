@@ -10,6 +10,7 @@ $strategro_linkedin = strategro_mod( 'strategro_linkedin' );
 ?>
 </main>
 
+<?php if ( ! strategro_elementor_location( 'footer' ) ) : ?>
 <footer class="sg-footer">
 	<div class="sg-footer__glow" aria-hidden="true"></div>
 	<div class="sg-footer__inner">
@@ -49,6 +50,7 @@ $strategro_linkedin = strategro_mod( 'strategro_linkedin' );
 		</div>
 	</div>
 </footer>
+<?php endif; ?>
 
 <?php wp_footer(); ?>
 </body>
