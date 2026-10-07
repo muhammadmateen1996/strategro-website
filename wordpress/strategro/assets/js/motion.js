@@ -336,6 +336,8 @@
 			if (!items.length || host.querySelector('.sg-marquee__track')) {
 				return;
 			}
+			var viewport = document.createElement('div');
+			viewport.className = 'sg-marquee__viewport';
 			var track = document.createElement('div');
 			track.className = 'sg-marquee__track';
 			items.forEach(function (item) {
@@ -346,7 +348,8 @@
 				clone.setAttribute('aria-hidden', 'true');
 				track.appendChild(clone);
 			});
-			host.appendChild(track);
+			viewport.appendChild(track);
+			host.appendChild(viewport);
 			var seconds = Math.max(24, Math.round(track.scrollWidth / 2 / 60));
 			track.style.setProperty('--sg-marquee-speed', seconds + 's');
 		});
@@ -419,6 +422,13 @@
 			if (!track) {
 				return;
 			}
+			// Pin a wrapper around the card row (not the whole section, whose
+			// heading would push the cards below the fold on shorter screens),
+			// and never transform the pinned element itself.
+			var pinBox = document.createElement('div');
+			pinBox.className = 'sg-hscroll-pin';
+			track.parentNode.insertBefore(pinBox, track);
+			pinBox.appendChild(track);
 			mm.add('(min-width: 1024px)', function () {
 				var distance = function () {
 					return Math.max(0, track.scrollWidth - window.innerWidth);
@@ -442,12 +452,18 @@
 					},
 					ease: 'none',
 					scrollTrigger: {
-						trigger: section,
-						start: 'top top',
+						trigger: pinBox,
+						start: function () {
+							// Centre the cards; if they're taller than the window, pin near the top.
+							return pinBox.offsetHeight + 160 > window.innerHeight ? 'top top+=40' : 'center center';
+						},
 						end: function () {
 							return '+=' + distance();
 						},
-						pin: true,
+						pin: pinBox,
+						// Elementor containers are flex boxes, where GSAP turns pin
+						// spacing off by default; without it the next section scrolls over the cards.
+						pinSpacing: true,
 						scrub: 0.8,
 						anticipatePin: 1,
 						invalidateOnRefresh: true,
@@ -767,20 +783,10 @@
 		if (!header) {
 			return;
 		}
-		var last = window.scrollY;
 		var ticking = false;
 		var update = function () {
 			var y = window.scrollY;
 			header.classList.toggle('is-scrolled', y > 10);
-			var menuOpen = header.querySelector('.sg-burger[aria-expanded="true"]');
-			if (!menuOpen && !inEditor) {
-				if (y > 220 && y > last + 6) {
-					header.classList.add('is-hidden');
-				} else if (y < last - 6 || y < 220) {
-					header.classList.remove('is-hidden');
-				}
-			}
-			last = y;
 			ticking = false;
 		};
 		window.addEventListener(
@@ -793,9 +799,6 @@
 			},
 			{ passive: true }
 		);
-		header.addEventListener('focusin', function () {
-			header.classList.remove('is-hidden');
-		});
 		update();
 	}
 

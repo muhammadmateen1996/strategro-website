@@ -50,6 +50,20 @@ The homepage's "latest insights" block is the shortcode
 `[strategro_latest_posts count="3"]`. Put it in any Shortcode widget to show
 recent posts anywhere.
 
+## Embedding a Clara form (or any HTML snippet)
+
+Drag an **HTML** widget into any container and paste the Clara snippet.
+Leads go straight to Clara as normal; the theme doesn't touch the form.
+
+- For an `<iframe>` snippet, keep its `height` (e.g. `height="640"`) or the
+  form gets cut off.
+- Script-based snippets sometimes show blank inside the Elementor editor.
+  That's normal; check the live page.
+- Don't put `sg-tilt` or `sg-magnetic` on the form's container (it would
+  move while people type). `sg-reveal` is fine.
+- The Contact page already has the Clara booking calendar and form; edit
+  those two HTML widgets to swap snippets.
+
 ## Motion effects
 
 Select any element in Elementor › **Advanced** › **CSS Classes** and add one

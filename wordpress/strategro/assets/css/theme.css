@@ -155,9 +155,6 @@ a {
 	box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6);
 }
 
-.sg-header.is-hidden {
-	transform: translateY(-110%);
-}
 
 .sg-header__inner {
 	display: flex;
@@ -167,6 +164,11 @@ a {
 	height: 76px;
 	margin-inline: auto;
 	padding-inline: 24px;
+	transition: height 0.35s var(--sg-ease);
+}
+
+.sg-header.is-scrolled .sg-header__inner {
+	height: 62px;
 }
 
 .sg-brand,
@@ -1087,11 +1089,13 @@ html.sg-leaving .sg-loader {
 	pointer-events: none;
 }
 
-/* sg-marquee: children scroll sideways forever */
-.sg-marquee {
+/* sg-marquee: children scroll sideways forever. The edge fade sits on an
+   inner viewport so the section's own background stays solid. */
+.sg-marquee__viewport {
+	width: 100%;
 	overflow: hidden;
-	-webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-	mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+	-webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+	mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 
 .sg-marquee__track {
@@ -1124,22 +1128,27 @@ html.sg-leaving .sg-loader {
 	padding-inline: 34px;
 	font-size: clamp(2rem, 4.5vw, 3.6rem);
 	white-space: nowrap;
+	background: linear-gradient(180deg, rgba(250, 248, 242, 0.92) 10%, rgba(221, 187, 111, 0.55) 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
 	color: transparent !important;
-	-webkit-text-stroke: 1px rgba(250, 248, 242, 0.32);
-	transition: color 0.3s ease, -webkit-text-stroke-color 0.3s ease;
+	-webkit-text-fill-color: transparent;
+	opacity: 0.55;
+	transition: opacity 0.35s ease, filter 0.35s ease;
 }
 
 .sg-marquee .elementor-widget-heading .elementor-heading-title::after {
 	content: "\2726";
 	margin-left: 68px;
 	font-size: 0.4em;
+	-webkit-text-fill-color: var(--sg-gold-500);
 	color: var(--sg-gold-500);
-	-webkit-text-stroke: 0;
 }
 
 .sg-marquee .elementor-widget-heading .elementor-heading-title:hover {
-	color: var(--sg-gold-400) !important;
-	-webkit-text-stroke-color: var(--sg-gold-400);
+	background-image: linear-gradient(180deg, var(--sg-gold-300), var(--sg-gold-500));
+	opacity: 1;
+	filter: drop-shadow(0 0 18px rgba(221, 187, 111, 0.45));
 }
 
 /* sg-line: a hairline that draws itself across as you scroll */
@@ -1396,6 +1405,10 @@ html.sg-leaving .sg-loader {
 /* Horizontal scroll showcase */
 .sg-hscroll {
 	overflow: hidden;
+}
+
+.sg-hscroll-pin {
+	width: 100%;
 }
 
 @media (min-width: 1024px) {
