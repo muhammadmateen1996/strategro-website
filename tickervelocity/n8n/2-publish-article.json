@@ -1,0 +1,20 @@
+{
+  "title": "Fed holds rates but opens the door to September cut",
+  "slug": "fed-holds-rates-september-cut",
+  "status": "draft",
+  "excerpt": "One or two sentences: what happened and why it matters. Shown under the headline and in search results.",
+  "content": "<p>Opening paragraph that answers who, what, when.</p><h2>What happened</h2><p>...</p><h2>How markets reacted</h2><p>...</p><h2>What to watch next</h2><p>...</p>",
+  "categories": [12],
+  "featured_media": 345,
+  "meta": {
+    "tv_takeaways": "Rates unchanged for a sixth straight meeting\nStatement drops 'elevated' inflation language\nFutures now price a 64% chance of a September cut",
+    "tv_tickers": "US2Y:down:Yields fell 9bp on softer guidance\nDXY:down:Dollar slipped 0.4%\nGOLD:up:Lower yields lift gold",
+    "tv_sentiment": "bullish",
+    "tv_horizon": "Next 3 months",
+    "tv_sources": "FOMC statement | https://www.federalreserve.gov/newsevents/pressreleases.htm\nCME FedWatch | https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+    "tv_reviewed_by": "Editor name",
+    "tv_ai_image": true,
+    "tv_breaking": false,
+    "tv_offer": ""
+  }
+}
