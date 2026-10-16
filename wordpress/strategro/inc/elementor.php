@@ -43,6 +43,71 @@ function strategro_elementor_location( $location ) {
 }
 
 /**
+ * Claiming the locations isn't always enough: a Theme Builder Single or
+ * Archive template set to the "Elementor Full Width" or "Canvas" layout (and
+ * the Site Settings "Default Page Layout" for Elementor-built posts) swaps
+ * the whole page file for one of Elementor's. Unless the site has opted in to
+ * Theme Builder templates, put the theme's own file back for the blog, its
+ * archives, search and 404. Pages keep any layout they chose themselves.
+ */
+add_filter( 'template_include', 'strategro_remember_template', 0 );
+function strategro_remember_template( $template ) {
+	$GLOBALS['strategro_wp_template'] = $template;
+	return $template;
+}
+
+add_filter( 'template_include', 'strategro_keep_theme_templates', 999 );
+function strategro_keep_theme_templates( $template ) {
+	$theme = isset( $GLOBALS['strategro_wp_template'] ) ? $GLOBALS['strategro_wp_template'] : '';
+	if ( ! $theme || $theme === $template || strategro_mod( 'strategro_builder_header' ) || ! strategro_is_elementor_file( $template ) ) {
+		return $template;
+	}
+	if ( isset( $_GET['elementor-preview'] ) || is_singular( array( 'elementor_library', 'e-landing-page' ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+		return $template;
+	}
+	if ( ! is_singular() || is_singular( 'post' ) ) {
+		return $theme;
+	}
+
+	$id  = get_queried_object_id();
+	$own = (string) get_post_meta( $id, '_wp_page_template', true );
+	if ( $own && 'default' !== $own && strategro_elementor_template_path( $own ) === $template ) {
+		return $template; // The page chose this layout itself.
+	}
+	if ( ( ! $own || 'default' === $own ) && strategro_is_elementor_page( $id ) && ! strategro_pro_single_template_applies() ) {
+		return $template; // Elementor's default layout for a page built with it.
+	}
+	return $theme;
+}
+
+function strategro_is_elementor_file( $file ) {
+	$file = wp_normalize_path( $file );
+	foreach ( array( 'ELEMENTOR_PATH', 'ELEMENTOR_PRO_PATH' ) as $constant ) {
+		if ( defined( $constant ) && 0 === strpos( $file, wp_normalize_path( constant( $constant ) ) ) ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function strategro_elementor_template_path( $slug ) {
+	if ( ! class_exists( '\Elementor\Plugin' ) ) {
+		return '';
+	}
+	$module = \Elementor\Plugin::$instance->modules_manager->get_modules( 'page-templates' );
+	return $module ? (string) $module->get_template_path( $slug ) : '';
+}
+
+/** Whether an Elementor Pro Single template is assigned to the current page. */
+function strategro_pro_single_template_applies() {
+	if ( ! class_exists( '\ElementorPro\Modules\ThemeBuilder\Module' ) ) {
+		return false;
+	}
+	$documents = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location( 'single' );
+	return ! empty( $documents );
+}
+
+/**
  * Templates from Elementor Pro's Theme Builder (header, footer, single,
  * archive...) or the "Elementor Header & Footer Builder" plugin that are
  * switched on for the site. Each item: array( 'title', 'type', 'source',
@@ -75,6 +140,7 @@ function strategro_header_overrides() {
 			'type'     => get_post_meta( $template->ID, '_elementor_template_type', true ),
 			'source'   => __( 'Elementor Pro Theme Builder', 'strategro' ),
 			'active'   => (bool) strategro_mod( 'strategro_builder_header' ),
+			'id'       => $template->ID,
 			'edit_url' => admin_url( 'post.php?post=' . $template->ID . '&action=elementor' ),
 		);
 	}

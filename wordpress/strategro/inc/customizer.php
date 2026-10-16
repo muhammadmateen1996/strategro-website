@@ -28,6 +28,7 @@ function strategro_mod( $key ) {
 		'strategro_blog_title'       => 'Practical thinking on *AI automation.*',
 		'strategro_blog_intro'       => 'Notes on what actually works when connecting AI to real business operations, written for the people making the decision.',
 		'strategro_blog_comments'    => false,
+		'strategro_blog_unify'       => true,
 	);
 	return get_theme_mod( $key, isset( $defaults[ $key ] ) ? $defaults[ $key ] : '' );
 }
@@ -160,6 +161,23 @@ function strategro_customize_register( $wp_customize ) {
 			'section' => 'strategro_blog',
 		)
 	);
+	$wp_customize->add_setting(
+		'strategro_blog_unify',
+		array(
+			'default'           => true,
+			'sanitize_callback' => 'rest_sanitize_boolean',
+		)
+	);
+	$wp_customize->add_control(
+		'strategro_blog_unify',
+		array(
+			'label'       => __( 'Show posts built with Elementor in the article design', 'strategro' ),
+			'description' => __( 'On: older posts made with Elementor get the same look as new ones (their text, headings, images and links are kept). Off: they keep their own Elementor layout.', 'strategro' ),
+			'type'        => 'checkbox',
+			'section'     => 'strategro_blog',
+		)
+	);
+
 	$wp_customize->add_setting(
 		'strategro_blog_comments',
 		array(

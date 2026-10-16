@@ -103,8 +103,12 @@ function strategro_post_media( $size = 'large', $post = null ) {
  * contents: array( 'html' => string, 'toc' => array( array( id, text, level ) ) ).
  */
 function strategro_article_parts() {
-	$html = apply_filters( 'the_content', get_the_content() );
-	$html = str_replace( ']]>', ']]&gt;', $html );
+	if ( strategro_is_elementor_page( get_the_ID() ) ) {
+		$html = strategro_builder_post_html();
+	} else {
+		$html = apply_filters( 'the_content', get_the_content() );
+		$html = str_replace( ']]>', ']]&gt;', $html );
+	}
 	$toc  = array();
 	$used = array();
 
@@ -142,6 +146,53 @@ function strategro_article_parts() {
 		'html' => $html,
 		'toc'  => count( $toc ) >= 2 ? $toc : array(),
 	);
+}
+
+/**
+ * A post built with Elementor, as clean article HTML. Elementor keeps a copy
+ * of every post's text, headings, images and links (without its layout) in
+ * the normal post content; that copy is shown in the Strategro design, so
+ * old posts match new ones. Editing in Elementor updates the copy.
+ */
+function strategro_builder_post_html() {
+	$frontend = class_exists( '\Elementor\Plugin' ) ? \Elementor\Plugin::$instance->frontend : null;
+	if ( $frontend ) {
+		$frontend->remove_content_filter();
+	}
+	$html = apply_filters( 'the_content', get_post_field( 'post_content', get_the_ID() ) );
+	if ( $frontend ) {
+		$frontend->add_content_filter();
+	}
+
+	$html = preg_replace( '#<(style|script)\b[^>]*>.*?</\1>#is', '', $html );
+	// The theme prints the title; drop a copy of it at the top of the text.
+	$title = trim( wp_strip_all_tags( get_the_title() ) );
+	$html  = preg_replace_callback(
+		'#^\s*(?:<p>\s*</p>\s*)*<h([1-3])[^>]*>(.*?)</h\1>#is',
+		function ( $m ) use ( $title ) {
+			return 0 === strcasecmp( trim( wp_strip_all_tags( $m[2] ) ), $title ) ? '' : $m[0];
+		},
+		$html,
+		1
+	);
+	// One page title per page: any other h1 becomes a section heading.
+	$html = preg_replace( '#<(/?)h1\b#i', '<$1h2', $html );
+	// Empty paragraphs left behind by removed layout.
+	return preg_replace( '#<p>(?:\s|&nbsp;|<br\s*/?>)*</p>#i', '', $html );
+}
+
+/**
+ * A post built with Elementor but shown in the article design doesn't need
+ * Elementor's page styles and scripts (its scripts would also stop with an
+ * error, because the Elementor layout they expect is never printed).
+ */
+add_action( 'template_redirect', 'strategro_skip_elementor_assets_on_articles', 11 );
+function strategro_skip_elementor_assets_on_articles() {
+	if ( ! is_singular( 'post' ) || ! class_exists( '\Elementor\Plugin' ) || isset( $_GET['elementor-preview'] ) // phpcs:ignore WordPress.Security.NonceVerification
+		|| ! strategro_mod( 'strategro_blog_unify' ) || strategro_mod( 'strategro_builder_header' ) || ! strategro_is_elementor_page( get_queried_object_id() ) ) {
+		return;
+	}
+	remove_action( 'wp_enqueue_scripts', array( \Elementor\Plugin::$instance->frontend, 'enqueue_styles' ), \Elementor\Frontend::ENQUEUED_STYLES_PRIORITY );
 }
 
 /** Prints the table of contents list. */

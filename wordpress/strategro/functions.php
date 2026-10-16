@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'STRATEGRO_VERSION', '1.3.0' );
+define( 'STRATEGRO_VERSION', '1.4.0' );
 define( 'STRATEGRO_DIR', get_template_directory() );
 define( 'STRATEGRO_URI', get_template_directory_uri() );
 
@@ -20,6 +20,8 @@ require STRATEGRO_DIR . '/inc/template-tags.php';
 require STRATEGRO_DIR . '/inc/setup.php';
 require STRATEGRO_DIR . '/inc/elementor.php';
 require STRATEGRO_DIR . '/inc/blog.php';
+require STRATEGRO_DIR . '/inc/performance.php';
+require STRATEGRO_DIR . '/inc/site-check.php';
 if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 	require STRATEGRO_DIR . '/inc/installer.php';
 }
@@ -80,12 +82,7 @@ function strategro_head_flags() {
 
 add_action( 'wp_enqueue_scripts', 'strategro_assets' );
 function strategro_assets() {
-	wp_enqueue_style(
-		'strategro-fonts',
-		'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap',
-		array(),
-		null
-	);
+	wp_enqueue_style( 'strategro-fonts', STRATEGRO_URI . '/assets/fonts/fonts.css', array(), STRATEGRO_VERSION );
 	wp_enqueue_style( 'strategro', STRATEGRO_URI . '/assets/css/theme.css', array( 'strategro-fonts' ), STRATEGRO_VERSION );
 
 	wp_enqueue_script( 'gsap', STRATEGRO_URI . '/assets/vendor/gsap.min.js', array(), '3.15.0', true );

@@ -35,24 +35,63 @@ What the button does:
 Running it again rebuilds the Strategro pages to their original design, so
 only do that before you start editing them.
 
-## Seeing an old header, footer or blog design instead of the Strategro one?
+## Still seeing an old design? Start with Strategro Site Check
 
-Update to theme 1.3.0 or later. The Strategro header, footer, blog list and
-article pages now always show, even if Elementor Pro **Theme Builder**
-templates (Header, Footer, Single Post, Archive) from an earlier design are
-still switched on.
+Appearance › **Strategro Site Check** looks at your published site and tells
+you, in plain words:
 
-To see what's left over, open Appearance › **Strategro Setup**. The
-**Header, footer and blog template check** box lists every old template,
-which tool made it, and an **Open** link. Delete any you don't need from
-Templates › Saved Templates (hover › Trash).
+1. **Why old pages might still show:** the theme version that's active,
+   whether a caching plugin needs clearing, old Theme Builder templates,
+   old blog pages that are still published, and posts built with Elementor.
+2. **Which plugins your published pages actually use:** Elementor Pro,
+   Essential Addons and any other Elementor add-on, with the exact widgets
+   and pages. A plugin nothing uses is marked "not used", so you can
+   deactivate it.
+3. **Speed:** what the theme already does, a one-click button for
+   Elementor's speed settings, page caching, and images over 400 KB.
+4. **Leftovers:** inactive plugins and themes, the installer's "Previous: …"
+   drafts, unused saved templates, old revisions.
+
+Nothing changes unless you press a button.
+
+What the theme does on its own (1.4.0 and later):
+- The Strategro header, footer, Insights list and articles always show, even
+  if Elementor Pro Theme Builder templates (including ones set to "Elementor
+  Full Width" or "Canvas") or Elementor's "Default Page Layout" would
+  replace them. Pages keep any layout they chose themselves.
+- Posts built with Elementor are shown in the article design, using the
+  text, headings, images and links Elementor keeps for every post. Turn this
+  off in Customize › Strategro Blog if you prefer their old layout.
+- Old addresses `/blog/`, `/blogs/` and `/news/` go to Insights, once no
+  published page uses them.
 
 Want Elementor Pro Theme Builder templates instead of the Strategro ones?
 Appearance › Customize › Strategro › tick **Use Elementor Pro Theme Builder
 templates**.
 
-Templates made with the separate *Elementor Header & Footer Builder* plugin
-can't be overridden by a theme; delete or deactivate them there.
+After any theme update, **clear your cache** (caching plugin, host panel or
+Cloudflare), or you may keep seeing old copies of pages.
+
+## Speed
+
+Built into the theme:
+- Fraunces and Inter are served from your own site and the two main files
+  are preloaded: no Google connection on each visit (faster, and better for
+  privacy).
+- Elementor's duplicate copies of the same fonts (every weight, from Google)
+  are removed.
+- WordPress's emoji script is removed.
+- Block editor styles load only for the blocks a page uses, and not at all
+  on pages built with Elementor.
+- Article scripts load only on articles.
+
+Worth doing on your site (Site Check tells you which apply):
+- Remove plugins nothing uses. Essential Addons, for example, adds jQuery
+  and its own files to every page even where none of its widgets appear.
+- Switch on Elementor's speed settings (one button in Site Check).
+- Add page caching (LiteSpeed Cache on LiteSpeed hosting, otherwise your
+  host's recommendation or WP Super Cache).
+- Shrink large images or serve WebP with an image optimiser.
 
 ## Day-to-day editing
 
@@ -67,7 +106,8 @@ can't be overridden by a theme; delete or deactivate them there.
 | Page transitions + loader | Appearance › Customize › Strategro › *Animated page transitions* |
 | Sticky header on/off | Appearance › Customize › Strategro › *Sticky header* |
 | Use Theme Builder templates instead | Appearance › Customize › Strategro › *Use Elementor Pro Theme Builder templates* |
-| Insights headline, intro, comments on/off | Appearance › Customize › **Strategro Blog** |
+| Insights headline, intro, comments on/off, old Elementor posts in the article design | Appearance › Customize › **Strategro Blog** |
+| See what's used, what's unused, speed tips | Appearance › **Strategro Site Check** |
 
 ## The blog (Insights)
 
@@ -91,8 +131,9 @@ design automatically.
   page uses them.
 - The Insights page can't be edited with Elementor (WordPress fills it with
   posts), so the theme hides its "Edit with Elementor" button.
-- Posts built with Elementor keep their own layout, under the theme's
-  article header.
+- Posts built with Elementor are shown in the article design too (their
+  text, headings, images and links). Switch this off in Customize ›
+  Strategro Blog to keep their own layout.
 
 The homepage's "latest insights" block is the shortcode
 `[strategro_latest_posts count="3"]`. Put it in any Shortcode widget to show

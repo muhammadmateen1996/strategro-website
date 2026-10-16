@@ -53,6 +53,12 @@ function strategro_setup_page() {
 			</div>
 		<?php endif; ?>
 
+		<div class="card" style="max-width:720px">
+			<h2><?php esc_html_e( 'Site check', 'strategro' ); ?></h2>
+			<p><?php esc_html_e( 'See what your published pages actually use, which plugins can go, anything that still shows an old design, and speed tips.', 'strategro' ); ?></p>
+			<p><a class="button button-primary" href="<?php echo esc_url( admin_url( 'themes.php?page=strategro-site-check' ) ); ?>"><?php esc_html_e( 'Open Strategro Site Check', 'strategro' ); ?></a></p>
+		</div>
+
 		<?php strategro_setup_header_check(); ?>
 
 		<div class="card" style="max-width:720px">

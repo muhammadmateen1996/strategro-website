@@ -15,7 +15,9 @@ if ( strategro_elementor_location( 'single' ) ) {
 while ( have_posts() ) :
 	the_post();
 	$strategro_term    = strategro_primary_category();
-	$strategro_builder = strategro_is_elementor_page( get_the_ID() );
+	// Posts built with Elementor show in the article design too, unless that's
+	// switched off (Customize > Strategro Blog) or the post is open in Elementor.
+	$strategro_builder = strategro_is_elementor_page( get_the_ID() ) && ( ! strategro_mod( 'strategro_blog_unify' ) || isset( $_GET['elementor-preview'] ) ); // phpcs:ignore WordPress.Security.NonceVerification
 	$strategro_parts   = $strategro_builder ? array( 'html' => '', 'toc' => array() ) : strategro_article_parts();
 	$strategro_toc     = $strategro_parts['toc'];
 	$strategro_minutes = strategro_reading_time();
