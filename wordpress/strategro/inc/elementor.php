@@ -19,14 +19,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  * ------------------------------------------------------------------------ */
 
 /**
- * Claiming the header/footer locations tells Elementor Pro the theme draws
- * them itself (through strategro_elementor_location()), so Pro no longer
- * swaps the theme's whole header file for its own.
+ * Claiming Elementor Pro's core locations tells Pro the theme draws them
+ * itself (through strategro_elementor_location()), so Pro no longer swaps
+ * the theme's header, footer, blog or article templates for its own.
  */
 add_action( 'elementor/theme/register_locations', 'strategro_register_elementor_locations' );
 function strategro_register_elementor_locations( $manager ) {
-	$manager->register_location( 'header' );
-	$manager->register_location( 'footer' );
+	foreach ( array( 'header', 'footer', 'single', 'archive' ) as $location ) {
+		$manager->register_location( $location );
+	}
 }
 
 /**
@@ -42,10 +43,10 @@ function strategro_elementor_location( $location ) {
 }
 
 /**
- * Templates from Elementor Pro's Theme Builder or the "Elementor Header &
- * Footer Builder" plugin that are switched on for the site. Each item:
- * array( 'title', 'type' (header|footer), 'source', 'active' (whether it
- * actually replaces the Strategro one), 'edit_url' ).
+ * Templates from Elementor Pro's Theme Builder (header, footer, single,
+ * archive...) or the "Elementor Header & Footer Builder" plugin that are
+ * switched on for the site. Each item: array( 'title', 'type', 'source',
+ * 'active' (whether it actually replaces the Strategro one), 'edit_url' ).
  */
 function strategro_header_overrides() {
 	$found = array();
@@ -58,7 +59,7 @@ function strategro_header_overrides() {
 			'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery
 				array(
 					'key'     => '_elementor_template_type',
-					'value'   => array( 'header', 'footer' ),
+					'value'   => array( 'header', 'footer', 'single', 'single-post', 'single-page', 'archive', 'search-results', 'error-404' ),
 					'compare' => 'IN',
 				),
 			),

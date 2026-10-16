@@ -98,11 +98,11 @@ function strategro_setup_header_check() {
 	$templates = strategro_header_overrides();
 	?>
 	<div class="card" style="max-width:720px">
-		<h2><?php esc_html_e( 'Header and footer check', 'strategro' ); ?></h2>
+		<h2><?php esc_html_e( 'Header, footer and blog template check', 'strategro' ); ?></h2>
 		<?php if ( ! $templates ) : ?>
-			<p><?php esc_html_e( 'No other header or footer templates are switched on. The site uses the Strategro header and footer.', 'strategro' ); ?></p>
+			<p><?php esc_html_e( 'No old Theme Builder templates are switched on. The site uses the Strategro header, footer and blog pages.', 'strategro' ); ?></p>
 		<?php else : ?>
-			<p><?php esc_html_e( 'These header and footer templates from an earlier design are still switched on:', 'strategro' ); ?></p>
+			<p><?php esc_html_e( 'These templates from an earlier design are still switched on:', 'strategro' ); ?></p>
 			<table class="widefat striped">
 				<thead><tr><th><?php esc_html_e( 'Template', 'strategro' ); ?></th><th><?php esc_html_e( 'Made with', 'strategro' ); ?></th><th><?php esc_html_e( 'On the site', 'strategro' ); ?></th><th></th></tr></thead>
 				<tbody>
@@ -121,7 +121,7 @@ function strategro_setup_header_check() {
 			<?php
 			printf(
 				/* translators: %s: Customizer link */
-				esc_html__( 'Elementor Pro Theme Builder templates only show if you switch on "Use Elementor Pro Theme Builder headers and footers" in %s.', 'strategro' ),
+				esc_html__( 'Elementor Pro Theme Builder templates only show if you switch on "Use Elementor Pro Theme Builder templates" in %s.', 'strategro' ),
 				'<a href="' . esc_url( admin_url( 'customize.php?autofocus[section]=strategro' ) ) . '">' . esc_html__( 'Customize > Strategro', 'strategro' ) . '</a>'
 			);
 			?>

@@ -9,6 +9,11 @@
 
 get_header();
 
+if ( strategro_elementor_location( 'single' ) ) {
+	get_footer();
+	return;
+}
+
 while ( have_posts() ) :
 	the_post();
 

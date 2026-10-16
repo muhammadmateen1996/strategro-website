@@ -6,6 +6,11 @@
  */
 
 get_header();
+
+if ( strategro_elementor_location( 'single' ) ) {
+	get_footer();
+	return;
+}
 ?>
 <section class="sg-band sg-band--dark sg-band--full sg-network">
 	<div class="sg-wrap">

@@ -35,20 +35,21 @@ What the button does:
 Running it again rebuilds the Strategro pages to their original design, so
 only do that before you start editing them.
 
-## Seeing an old header or footer instead of the Strategro one?
+## Seeing an old header, footer or blog design instead of the Strategro one?
 
-Update to theme 1.2.0 or later. The Strategro header and footer now always
-show, even if an Elementor Pro **Theme Builder** header from an earlier
-design is still switched on.
+Update to theme 1.3.0 or later. The Strategro header, footer, blog list and
+article pages now always show, even if Elementor Pro **Theme Builder**
+templates (Header, Footer, Single Post, Archive) from an earlier design are
+still switched on.
 
 To see what's left over, open Appearance › **Strategro Setup**. The
-**Header and footer check** box lists every old header or footer template,
+**Header, footer and blog template check** box lists every old template,
 which tool made it, and an **Open** link. Delete any you don't need from
 Templates › Saved Templates (hover › Trash).
 
-Want an Elementor Pro Theme Builder header instead of the Strategro one?
+Want Elementor Pro Theme Builder templates instead of the Strategro ones?
 Appearance › Customize › Strategro › tick **Use Elementor Pro Theme Builder
-headers and footers**.
+templates**.
 
 Templates made with the separate *Elementor Header & Footer Builder* plugin
 can't be overridden by a theme; delete or deactivate them there.
@@ -65,7 +66,33 @@ can't be overridden by a theme; delete or deactivate them there.
 | Blog posts | Posts › Add New (they appear on Insights and the homepage automatically) |
 | Page transitions + loader | Appearance › Customize › Strategro › *Animated page transitions* |
 | Sticky header on/off | Appearance › Customize › Strategro › *Sticky header* |
-| Use a Theme Builder header instead | Appearance › Customize › Strategro › *Use Elementor Pro Theme Builder headers and footers* |
+| Use Theme Builder templates instead | Appearance › Customize › Strategro › *Use Elementor Pro Theme Builder templates* |
+| Insights headline, intro, comments on/off | Appearance › Customize › **Strategro Blog** |
+
+## The blog (Insights)
+
+The Insights list and every article are designed by the theme, so there is
+nothing to build: write a post (Posts › Add New) and it appears in the
+design automatically.
+
+- **Insights page:** headline (put `*asterisks*` around words to make them
+  shimmer gold) and intro are in Customize › Strategro Blog. Topic filters,
+  search and article counts fill themselves in from your categories.
+- **Each article:** title, category, author and reading time at the top;
+  the featured image; a table of contents built from the post's headings
+  (with "minutes left" while reading); share buttons; author box (from
+  Users › Profile › Biographical Info); previous/next and related articles.
+- **Excerpt:** if you fill in a post's Excerpt box, it shows under the title
+  and on its card. Otherwise the card uses the first lines of the post.
+- **No featured image?** The card gets generated cover art in the brand
+  colours instead of an empty box.
+- **Categories:** "Uncategorized" is never shown; give posts a real category.
+- Old addresses `/blog/`, `/blogs/` and `/news/` redirect to Insights if no
+  page uses them.
+- The Insights page can't be edited with Elementor (WordPress fills it with
+  posts), so the theme hides its "Edit with Elementor" button.
+- Posts built with Elementor keep their own layout, under the theme's
+  article header.
 
 The homepage's "latest insights" block is the shortcode
 `[strategro_latest_posts count="3"]`. Put it in any Shortcode widget to show
