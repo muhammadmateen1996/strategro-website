@@ -11,7 +11,6 @@ const eslintConfig = defineConfig([
     ".next/**",
     // WordPress theme + build scripts (plain browser JS / PHP, not part of the Next.js app)
     "wordpress/**",
-    "tickervelocity/**",
     "out/**",
     "build/**",
     "next-env.d.ts",
